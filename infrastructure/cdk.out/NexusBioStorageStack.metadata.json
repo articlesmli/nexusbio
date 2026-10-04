@@ -1,0 +1,247 @@
+{
+  "/NexusBioStorageStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:19:22)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioStorageStack/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+      "data": true
+    }
+  ],
+  "/NexusBioStorageStack/OpenSearchEncryptionPolicy": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OpenSearchEncryptionPolicy"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new StorageStack (/home/ivanovaml/nexusbio/infrastructure/lib/storage_stack.ts:28:30)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:19:22)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioStorageStack/OpenSearchNetworkPolicy": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OpenSearchNetworkPolicy"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new StorageStack (/home/ivanovaml/nexusbio/infrastructure/lib/storage_stack.ts:43:27)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:19:22)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioStorageStack/OpenSearchCollection": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OpenSearchCollection"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new StorageStack (/home/ivanovaml/nexusbio/infrastructure/lib/storage_stack.ts:64:34)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:19:22)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioStorageStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/NexusBioStorageStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/NexusBioStorageStack/NexusBioDataLake/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioDataLakeFCDDFC34"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new StorageStack (/home/ivanovaml/nexusbio/infrastructure/lib/storage_stack.ts:15:27)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:19:22)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketAutoDeleteObjects"
+      }
+    }
+  ],
+  "/NexusBioStorageStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/NexusBioStorageStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/NexusBioStorageStack/NexusBioAuditTrail/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioAuditTrail26B51DB8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in aws-cdk-lib...",
+        "new StorageStack (/home/ivanovaml/nexusbio/infrastructure/lib/storage_stack.ts:21:23)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:19:22)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioStorageStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:33:5)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/NexusBioStorageStack/Exports/Output{\"Fn::GetAtt\":[\"NexusBioDataLakeFCDDFC34\",\"Arn\"]}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputFnGetAttNexusBioDataLakeFCDDFC34ArnA3B26399"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:33:5)"
+      ]
+    }
+  ],
+  "/NexusBioStorageStack/Exports/Output{\"Fn::GetAtt\":[\"NexusBioAuditTrail26B51DB8\",\"Arn\"]}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputFnGetAttNexusBioAuditTrail26B51DB8ArnF5ED74D7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:33:5)"
+      ]
+    }
+  ],
+  "/NexusBioStorageStack/Exports/Output{\"Ref\":\"NexusBioAuditTrail26B51DB8\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefNexusBioAuditTrail26B51DB847FC975B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:33:5)"
+      ]
+    }
+  ],
+  "/NexusBioStorageStack/Exports/Output{\"Ref\":\"NexusBioDataLakeFCDDFC34\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefNexusBioDataLakeFCDDFC34F2C25BC5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:33:5)"
+      ]
+    }
+  ],
+  "/NexusBioStorageStack/NexusBioDataLake/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioDataLakePolicy33345557"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new StorageStack (/home/ivanovaml/nexusbio/infrastructure/lib/storage_stack.ts:15:27)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:19:22)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketPolicyStatements"
+      }
+    }
+  ],
+  "/NexusBioStorageStack/NexusBioDataLake/AutoDeleteObjectsCustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioDataLakeAutoDeleteObjectsCustomResourceBCF2F8BC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ]
+}

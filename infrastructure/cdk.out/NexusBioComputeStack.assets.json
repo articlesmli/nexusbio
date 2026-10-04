@@ -1,0 +1,51 @@
+{
+  "version": "54.0.0",
+  "files": {
+    "12edc767124a7c73df2ca5e79dd933ce4ef3b6ac8a629a88eb7e61fcc741641e": {
+      "displayName": "LambdaOrchestrator/Code",
+      "source": {
+        "path": "asset.12edc767124a7c73df2ca5e79dd933ce4ef3b6ac8a629a88eb7e61fcc741641e",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "089340569022-us-east-1-4fc8d3d2": {
+          "bucketName": "cdk-hnb659fds-assets-089340569022-us-east-1",
+          "objectKey": "12edc767124a7c73df2ca5e79dd933ce4ef3b6ac8a629a88eb7e61fcc741641e.zip",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-file-publishing-role-089340569022-us-east-1"
+        }
+      }
+    },
+    "2c963f1bd51dcf4477cf3e58849f40adf89d937def58bb506407855ee1493baf": {
+      "displayName": "NexusBioComputeStack Template",
+      "source": {
+        "path": "NexusBioComputeStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "089340569022-us-east-1-37478e01": {
+          "bucketName": "cdk-hnb659fds-assets-089340569022-us-east-1",
+          "objectKey": "2c963f1bd51dcf4477cf3e58849f40adf89d937def58bb506407855ee1493baf.json",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-file-publishing-role-089340569022-us-east-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {
+    "de0ebe8a3f4ee1650700854d98b5c41f8da51ab4d4d14466a71884577ef33f36": {
+      "displayName": "SandboxService/TaskDef/web/AssetImage",
+      "source": {
+        "directory": "asset.de0ebe8a3f4ee1650700854d98b5c41f8da51ab4d4d14466a71884577ef33f36"
+      },
+      "destinations": {
+        "089340569022-us-east-1-af729b3b": {
+          "repositoryName": "cdk-hnb659fds-container-assets-089340569022-us-east-1",
+          "imageTag": "de0ebe8a3f4ee1650700854d98b5c41f8da51ab4d4d14466a71884577ef33f36",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-image-publishing-role-089340569022-us-east-1"
+        }
+      }
+    }
+  }
+}

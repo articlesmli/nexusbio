@@ -1,0 +1,409 @@
+{
+  "/NexusBioNetworkingStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
+    },
+    {
+      "type": "aws:cdk:acknowledged-rules",
+      "data": {
+        "CloudFormation-Validate::W3010": "Literal AZs in template are the result of accessing stack.availabilityZones, this is expected and safe"
+      },
+      "trace": [
+        "    ...new Vpc2 in aws-cdk-lib...",
+        "    at new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
+        "    at <anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
+        "    ...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCA3321769"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/IGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCIGWD645D355"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/VPCGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCVPCGWED953A7C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:33:5)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/Exports/Output{\"Ref\":\"NexusBioVPCPrivateSubnetSubnet1SubnetD697271F\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefNexusBioVPCPrivateSubnetSubnet1SubnetD697271F0454F5CF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:33:5)"
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/Exports/Output{\"Ref\":\"NexusBioVPCPrivateSubnetSubnet2Subnet29FC0BF9\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefNexusBioVPCPrivateSubnetSubnet2Subnet29FC0BF9AED8ED84"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:33:5)"
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/Exports/Output{\"Ref\":\"NexusBioVPCA3321769\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefNexusBioVPCA3321769C971BC5B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:33:5)"
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PublicSubnetSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPublicSubnetSubnet1SubnetC4C77E4C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:287 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PublicSubnetSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPublicSubnetSubnet1RouteTable1F97C866"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:287 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PublicSubnetSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPublicSubnetSubnet1RouteTableAssociationBDD7C51A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:287 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PublicSubnetSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPublicSubnetSubnet1DefaultRoute4CAA649D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:225 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PublicSubnetSubnet1/EIP": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPublicSubnetSubnet1EIPF81C35C1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PublicSubnetSubnet1/NATGateway": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPublicSubnetSubnet1NATGateway24BCBC9C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PublicSubnetSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPublicSubnetSubnet2SubnetE8BF887B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:287 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PublicSubnetSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPublicSubnetSubnet2RouteTable5A51BB2B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:287 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PublicSubnetSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPublicSubnetSubnet2RouteTableAssociation23668FDC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:287 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PublicSubnetSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPublicSubnetSubnet2DefaultRoute5926C465"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:225 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PrivateSubnetSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPrivateSubnetSubnet1SubnetD697271F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:289 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PrivateSubnetSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPrivateSubnetSubnet1RouteTableE1FBDD67"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:289 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PrivateSubnetSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPrivateSubnetSubnet1RouteTableAssociation340B041E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:289 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PrivateSubnetSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPrivateSubnetSubnet1DefaultRoute9B4058C6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PrivateSubnetSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPrivateSubnetSubnet2Subnet29FC0BF9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:289 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PrivateSubnetSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPrivateSubnetSubnet2RouteTable956010C4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:289 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PrivateSubnetSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPrivateSubnetSubnet2RouteTableAssociation6786FD43"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:289 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/NexusBioVPC/PrivateSubnetSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NexusBioVPCPrivateSubnetSubnet2DefaultRouteC7B6E750"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
+        "...node internals..."
+      ]
+    }
+  ]
+}

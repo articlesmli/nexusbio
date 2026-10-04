@@ -1,0 +1,17 @@
+{
+  "app": "npx ts-node --prefer-ts-exts bin/nexusbio.ts",
+  "watch": {
+    "include": [
+      "**/*.ts"
+    ],
+    "exclude": [
+      "README.md",
+      "cdk*.json",
+      "node_modules",
+      "*.d.ts",
+      "*.js",
+      "build",
+      "dist"
+    ]
+  }
+}

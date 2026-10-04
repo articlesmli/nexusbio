@@ -1,0 +1,36 @@
+{
+  "version": "54.0.0",
+  "files": {
+    "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6": {
+      "displayName": "NexusBioStorageStack/Custom::S3AutoDeleteObjectsCustomResourceProvider Code",
+      "source": {
+        "path": "asset.faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "089340569022-us-east-1-62130d47": {
+          "bucketName": "cdk-hnb659fds-assets-089340569022-us-east-1",
+          "objectKey": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-file-publishing-role-089340569022-us-east-1"
+        }
+      }
+    },
+    "767e1fbd0491ae0764e48f9babe461aab982aaf4274ee6b6d4b56d299ce38c7f": {
+      "displayName": "NexusBioStorageStack Template",
+      "source": {
+        "path": "NexusBioStorageStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "089340569022-us-east-1-ae8da505": {
+          "bucketName": "cdk-hnb659fds-assets-089340569022-us-east-1",
+          "objectKey": "767e1fbd0491ae0764e48f9babe461aab982aaf4274ee6b6d4b56d299ce38c7f.json",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-file-publishing-role-089340569022-us-east-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

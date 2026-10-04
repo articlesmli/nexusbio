@@ -1,0 +1,384 @@
+{
+  "/NexusBioComputeStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
+    },
+    {
+      "type": "aws:cdk:warning",
+      "data": "No cross-stack-reference strength configured, defaulting to \"strong\". We recommend you set feature flag \"@aws-cdk/core:defaultCrossStackReferences\" to \"both\", then deploy everywhere, then set it to \"weak\". Alternatively, set it to \"strong\" explicitly to lock in the current producer-protecting behavior. (See: https://github.com/aws/aws-cdk/blob/main/packages/aws-cdk-lib/README.md#reference-strength) [ack: @aws-cdk/core:crossStackReferencesDefaultStrong]",
+      "trace": [
+        "Annotations.addMessage (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/annotations.js:1:3506)",
+        "Annotations.addWarningV2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2194)",
+        "resolveValue (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/private/refs.js:1:7177)",
+        "resolveReferencesInElements (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/private/refs.js:1:5045)",
+        "resolveReferences (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/private/refs.js:1:4718)",
+        "prepareApp (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/private/prepare-app.js:1:1240)",
+        "synthesize (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/private/synthesis.js:1:2625)",
+        "App.synth (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/stage.js:1:5061)",
+        "App.synth (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/app.js:1:5126)",
+        "Object.<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:33:5)",
+        "Module._compile (node:internal/modules/cjs/loader:1929:14)",
+        "Module.m._compile (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/index.ts:1618:23)",
+        "node:internal/modules/cjs/loader:2060:10",
+        "Object.require.extensions.<computed> [as .ts] (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/index.ts:1621:12)",
+        "Module.load (node:internal/modules/cjs/loader:1651:32)",
+        "Module._load (node:internal/modules/cjs/loader:1443:12)",
+        "wrapModuleLoad (node:internal/modules/cjs/loader:261:19)",
+        "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
+        "phase4 (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:649:14)",
+        "bootstrap (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:95:10)",
+        "main (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:55:10)",
+        "Object.<anonymous> (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:800:3)",
+        "Module._compile (node:internal/modules/cjs/loader:1929:14)",
+        "Object.<anonymous> (node:internal/modules/cjs/loader:2060:10)",
+        "Module.load (node:internal/modules/cjs/loader:1651:32)",
+        "Module._load (node:internal/modules/cjs/loader:1443:12)",
+        "wrapModuleLoad (node:internal/modules/cjs/loader:261:19)",
+        "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
+        "node:internal/main/run_main_module:33:47"
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/SandboxCluster/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SandboxClusterB2BA267F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Cluster2 in aws-cdk-lib...",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:21:21)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/SandboxService/LoadBalancerDNS": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SandboxServiceLoadBalancerDNSC1BBDF52"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new NetworkLoadBalancedFargateService2 in aws-cdk-lib...",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/SandboxService/Service": [
+    {
+      "type": "aws:cdk:warning",
+      "data": "Enable the 'circuitBreaker' property to trigger a quicker deployment failure if tasks are failing to start up (without this setting deployments may take up to 3 hours to fail). [ack: @aws-cdk/aws-ecs:shouldUseCircuitBreaker]",
+      "trace": [
+        "Annotations.addMessage (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/annotations.js:1:3506)",
+        "Annotations.addWarningV2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2194)",
+        "new BaseService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ecs/lib/base/base-service.js:1:14814)",
+        "new BaseService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/no-box-stack-traces.js:1:349)",
+        "new FargateService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ecs/lib/fargate/fargate-service.js:1:8083)",
+        "new FargateService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:861)",
+        "new NetworkLoadBalancedFargateService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ecs-patterns/lib/fargate/network-load-balanced-fargate-service.js:1:6451)",
+        "new NetworkLoadBalancedFargateService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:861)",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)",
+        "Object.<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
+        "Module._compile (node:internal/modules/cjs/loader:1929:14)",
+        "Module.m._compile (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/index.ts:1618:23)",
+        "node:internal/modules/cjs/loader:2060:10",
+        "Object.require.extensions.<computed> [as .ts] (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/index.ts:1621:12)",
+        "Module.load (node:internal/modules/cjs/loader:1651:32)",
+        "Module._load (node:internal/modules/cjs/loader:1443:12)",
+        "wrapModuleLoad (node:internal/modules/cjs/loader:261:19)",
+        "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
+        "phase4 (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:649:14)",
+        "bootstrap (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:95:10)",
+        "main (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:55:10)",
+        "Object.<anonymous> (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:800:3)",
+        "Module._compile (node:internal/modules/cjs/loader:1929:14)",
+        "Object.<anonymous> (node:internal/modules/cjs/loader:2060:10)",
+        "Module.load (node:internal/modules/cjs/loader:1651:32)",
+        "Module._load (node:internal/modules/cjs/loader:1443:12)",
+        "wrapModuleLoad (node:internal/modules/cjs/loader:261:19)",
+        "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
+        "node:internal/main/run_main_module:33:47"
+      ]
+    },
+    {
+      "type": "aws:cdk:warning",
+      "data": "minHealthyPercent has not been configured so the default value of 50% is used. The number of running tasks will decrease below the desired count during deployments etc. See https://github.com/aws/aws-cdk/issues/31705 [ack: @aws-cdk/aws-ecs:minHealthyPercent]",
+      "trace": [
+        "Annotations.addMessage (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/annotations.js:1:3506)",
+        "Annotations.addWarningV2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2194)",
+        "new BaseService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ecs/lib/base/base-service.js:1:16436)",
+        "new BaseService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/no-box-stack-traces.js:1:349)",
+        "new FargateService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ecs/lib/fargate/fargate-service.js:1:8083)",
+        "new FargateService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:861)",
+        "new NetworkLoadBalancedFargateService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ecs-patterns/lib/fargate/network-load-balanced-fargate-service.js:1:6451)",
+        "new NetworkLoadBalancedFargateService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:861)",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)",
+        "Object.<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
+        "Module._compile (node:internal/modules/cjs/loader:1929:14)",
+        "Module.m._compile (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/index.ts:1618:23)",
+        "node:internal/modules/cjs/loader:2060:10",
+        "Object.require.extensions.<computed> [as .ts] (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/index.ts:1621:12)",
+        "Module.load (node:internal/modules/cjs/loader:1651:32)",
+        "Module._load (node:internal/modules/cjs/loader:1443:12)",
+        "wrapModuleLoad (node:internal/modules/cjs/loader:261:19)",
+        "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
+        "phase4 (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:649:14)",
+        "bootstrap (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:95:10)",
+        "main (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:55:10)",
+        "Object.<anonymous> (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:800:3)",
+        "Module._compile (node:internal/modules/cjs/loader:1929:14)",
+        "Object.<anonymous> (node:internal/modules/cjs/loader:2060:10)",
+        "Module.load (node:internal/modules/cjs/loader:1651:32)",
+        "Module._load (node:internal/modules/cjs/loader:1443:12)",
+        "wrapModuleLoad (node:internal/modules/cjs/loader:261:19)",
+        "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
+        "node:internal/main/run_main_module:33:47"
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/LambdaOrchestrator/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LambdaOrchestratorE721C3F9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:35:34)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:33:5)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/SandboxService/LB/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SandboxServiceLB37D1042A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new NetworkLoadBalancedFargateService2 in aws-cdk-lib...",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/SandboxService/TaskDef/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SandboxServiceTaskDefDA830ECB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new NetworkLoadBalancedFargateService2 in aws-cdk-lib...",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/SandboxService/Service/Service": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SandboxServiceD9D0E336"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new NetworkLoadBalancedFargateService2 in aws-cdk-lib...",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/LambdaOrchestrator/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LambdaOrchestratorServiceRoleE363C8B2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:35:34)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/LambdaOrchestrator/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LambdaOrchestratorSecurityGroupC0C8DB98"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:35:34)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/SandboxService/LB/PublicListener/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SandboxServiceLBPublicListenerCB69CD23"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/SandboxService/TaskDef/TaskRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SandboxServiceTaskDefTaskRoleEC9E4CA2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new NetworkLoadBalancedFargateService2 in aws-cdk-lib...",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)"
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/SandboxService/TaskDef/ExecutionRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SandboxServiceTaskDefExecutionRoleE6E947B8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/SandboxService/Service/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SandboxServiceSecurityGroup8B39983F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new NetworkLoadBalancedFargateService2 in aws-cdk-lib...",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)"
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/LambdaOrchestrator/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LambdaOrchestratorServiceRoleDefaultPolicy69A3BE4C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/SandboxService/LB/PublicListener/ECSGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SandboxServiceLBPublicListenerECSGroupE3B73D2C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new NetworkLoadBalancedFargateService2 in aws-cdk-lib...",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)"
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/SandboxService/TaskDef/web/LogGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SandboxServiceTaskDefwebLogGroup78E4594A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/NexusBioComputeStack/SandboxService/TaskDef/ExecutionRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SandboxServiceTaskDefExecutionRoleDefaultPolicyD48DC60E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,563 @@
+{
+ "Resources": {
+  "SandboxClusterB2BA267F": {
+   "Type": "AWS::ECS::Cluster",
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/SandboxCluster/Resource"
+   }
+  },
+  "SandboxServiceLB37D1042A": {
+   "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+   "Properties": {
+    "LoadBalancerAttributes": [
+     {
+      "Key": "deletion_protection.enabled",
+      "Value": "false"
+     }
+    ],
+    "Scheme": "internal",
+    "Subnets": [
+     {
+      "Fn::ImportValue": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCPrivateSubnetSubnet1SubnetD697271F0454F5CF"
+     },
+     {
+      "Fn::ImportValue": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCPrivateSubnetSubnet2Subnet29FC0BF9AED8ED84"
+     }
+    ],
+    "Type": "network"
+   },
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/SandboxService/LB/Resource"
+   }
+  },
+  "SandboxServiceLBPublicListenerCB69CD23": {
+   "Type": "AWS::ElasticLoadBalancingV2::Listener",
+   "Properties": {
+    "DefaultActions": [
+     {
+      "TargetGroupArn": {
+       "Ref": "SandboxServiceLBPublicListenerECSGroupE3B73D2C"
+      },
+      "Type": "forward"
+     }
+    ],
+    "LoadBalancerArn": {
+     "Ref": "SandboxServiceLB37D1042A"
+    },
+    "Port": 80,
+    "Protocol": "TCP"
+   },
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/SandboxService/LB/PublicListener/Resource"
+   }
+  },
+  "SandboxServiceLBPublicListenerECSGroupE3B73D2C": {
+   "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+   "Properties": {
+    "Port": 8000,
+    "Protocol": "TCP",
+    "TargetType": "ip",
+    "VpcId": {
+     "Fn::ImportValue": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCA3321769C971BC5B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/SandboxService/LB/PublicListener/ECSGroup/Resource"
+   }
+  },
+  "SandboxServiceTaskDefTaskRoleEC9E4CA2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/SandboxService/TaskDef/TaskRole/Resource"
+   }
+  },
+  "SandboxServiceTaskDefDA830ECB": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Essential": true,
+      "Image": {
+       "Fn::Sub": "089340569022.dkr.ecr.us-east-1.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-089340569022-us-east-1:de0ebe8a3f4ee1650700854d98b5c41f8da51ab4d4d14466a71884577ef33f36"
+      },
+      "LogConfiguration": {
+       "LogDriver": "awslogs",
+       "Options": {
+        "awslogs-group": {
+         "Ref": "SandboxServiceTaskDefwebLogGroup78E4594A"
+        },
+        "awslogs-stream-prefix": "SandboxService",
+        "awslogs-region": "us-east-1"
+       }
+      },
+      "Name": "web",
+      "PortMappings": [
+       {
+        "ContainerPort": 8000,
+        "Protocol": "tcp"
+       }
+      ]
+     }
+    ],
+    "Cpu": "1024",
+    "ExecutionRoleArn": {
+     "Fn::GetAtt": [
+      "SandboxServiceTaskDefExecutionRoleE6E947B8",
+      "Arn"
+     ]
+    },
+    "Family": "NexusBioComputeStackSandboxServiceTaskDefA2785EED",
+    "Memory": "2048",
+    "NetworkMode": "awsvpc",
+    "RequiresCompatibilities": [
+     "FARGATE"
+    ],
+    "TaskRoleArn": {
+     "Fn::GetAtt": [
+      "SandboxServiceTaskDefTaskRoleEC9E4CA2",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/SandboxService/TaskDef/Resource"
+   }
+  },
+  "SandboxServiceTaskDefwebLogGroup78E4594A": {
+   "Type": "AWS::Logs::LogGroup",
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/SandboxService/TaskDef/web/LogGroup/Resource"
+   }
+  },
+  "SandboxServiceTaskDefExecutionRoleE6E947B8": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/SandboxService/TaskDef/ExecutionRole/Resource"
+   }
+  },
+  "SandboxServiceTaskDefExecutionRoleDefaultPolicyD48DC60E": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":ecr:us-east-1:089340569022:repository/cdk-hnb659fds-container-assets-089340569022-us-east-1"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SandboxServiceTaskDefwebLogGroup78E4594A",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SandboxServiceTaskDefExecutionRoleDefaultPolicyD48DC60E",
+    "Roles": [
+     {
+      "Ref": "SandboxServiceTaskDefExecutionRoleE6E947B8"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/SandboxService/TaskDef/ExecutionRole/DefaultPolicy/Resource"
+   }
+  },
+  "SandboxServiceD9D0E336": {
+   "Type": "AWS::ECS::Service",
+   "Properties": {
+    "Cluster": {
+     "Ref": "SandboxClusterB2BA267F"
+    },
+    "DeploymentConfiguration": {
+     "Alarms": {
+      "AlarmNames": [],
+      "Enable": false,
+      "Rollback": false
+     },
+     "MaximumPercent": 200,
+     "MinimumHealthyPercent": 50
+    },
+    "EnableECSManagedTags": false,
+    "HealthCheckGracePeriodSeconds": 60,
+    "LaunchType": "FARGATE",
+    "LoadBalancers": [
+     {
+      "ContainerName": "web",
+      "ContainerPort": 8000,
+      "TargetGroupArn": {
+       "Ref": "SandboxServiceLBPublicListenerECSGroupE3B73D2C"
+      }
+     }
+    ],
+    "NetworkConfiguration": {
+     "AwsvpcConfiguration": {
+      "AssignPublicIp": "DISABLED",
+      "SecurityGroups": [
+       {
+        "Fn::GetAtt": [
+         "SandboxServiceSecurityGroup8B39983F",
+         "GroupId"
+        ]
+       }
+      ],
+      "Subnets": [
+       {
+        "Fn::ImportValue": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCPrivateSubnetSubnet1SubnetD697271F0454F5CF"
+       },
+       {
+        "Fn::ImportValue": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCPrivateSubnetSubnet2Subnet29FC0BF9AED8ED84"
+       }
+      ]
+     }
+    },
+    "TaskDefinition": {
+     "Ref": "SandboxServiceTaskDefDA830ECB"
+    }
+   },
+   "DependsOn": [
+    "SandboxServiceLBPublicListenerECSGroupE3B73D2C",
+    "SandboxServiceLBPublicListenerCB69CD23",
+    "SandboxServiceTaskDefTaskRoleEC9E4CA2"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/SandboxService/Service/Service"
+   }
+  },
+  "SandboxServiceSecurityGroup8B39983F": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "NexusBioComputeStack/SandboxService/Service/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Fn::ImportValue": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCA3321769C971BC5B"
+    }
+   },
+   "DependsOn": [
+    "SandboxServiceTaskDefTaskRoleEC9E4CA2"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/SandboxService/Service/SecurityGroup/Resource"
+   }
+  },
+  "LambdaOrchestratorServiceRoleE363C8B2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/LambdaOrchestrator/ServiceRole/Resource"
+   }
+  },
+  "LambdaOrchestratorServiceRoleDefaultPolicy69A3BE4C": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:DeleteObject*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging",
+        "s3:Abort*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "NexusBioStorageStack:ExportsOutputFnGetAttNexusBioDataLakeFCDDFC34ArnA3B26399"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "NexusBioStorageStack:ExportsOutputFnGetAttNexusBioDataLakeFCDDFC34ArnA3B26399"
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:BatchWriteItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "NexusBioStorageStack:ExportsOutputFnGetAttNexusBioAuditTrail26B51DB8ArnF5ED74D7"
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "LambdaOrchestratorServiceRoleDefaultPolicy69A3BE4C",
+    "Roles": [
+     {
+      "Ref": "LambdaOrchestratorServiceRoleE363C8B2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/LambdaOrchestrator/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "LambdaOrchestratorSecurityGroupC0C8DB98": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Automatic security group for Lambda Function NexusBioComputeStackLambdaOrchestrator3A058D34",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Fn::ImportValue": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCA3321769C971BC5B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/LambdaOrchestrator/SecurityGroup/Resource"
+   }
+  },
+  "LambdaOrchestratorE721C3F9": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-089340569022-us-east-1",
+     "S3Key": "12edc767124a7c73df2ca5e79dd933ce4ef3b6ac8a629a88eb7e61fcc741641e.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "AUDIT_TABLE_NAME": {
+       "Fn::ImportValue": "NexusBioStorageStack:ExportsOutputRefNexusBioAuditTrail26B51DB847FC975B"
+      },
+      "DATALAKE_BUCKET": {
+       "Fn::ImportValue": "NexusBioStorageStack:ExportsOutputRefNexusBioDataLakeFCDDFC34F2C25BC5"
+      },
+      "SANDBOX_API_URL": {
+       "Fn::Join": [
+        "",
+        [
+         "http://",
+         {
+          "Fn::GetAtt": [
+           "SandboxServiceLB37D1042A",
+           "DNSName"
+          ]
+         },
+         ":8000/evaluate-smiles"
+        ]
+       ]
+      }
+     }
+    },
+    "Handler": "handler.lambda_handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "LambdaOrchestratorServiceRoleE363C8B2",
+      "Arn"
+     ]
+    },
+    "Runtime": "python3.11",
+    "Timeout": 60,
+    "VpcConfig": {
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "LambdaOrchestratorSecurityGroupC0C8DB98",
+        "GroupId"
+       ]
+      }
+     ],
+     "SubnetIds": [
+      {
+       "Fn::ImportValue": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCPrivateSubnetSubnet1SubnetD697271F0454F5CF"
+      },
+      {
+       "Fn::ImportValue": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCPrivateSubnetSubnet2Subnet29FC0BF9AED8ED84"
+      }
+     ]
+    }
+   },
+   "DependsOn": [
+    "LambdaOrchestratorServiceRoleDefaultPolicy69A3BE4C",
+    "LambdaOrchestratorServiceRoleE363C8B2"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/LambdaOrchestrator/Resource",
+    "aws:asset:path": "asset.12edc767124a7c73df2ca5e79dd933ce4ef3b6ac8a629a88eb7e61fcc741641e",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/2VR0W7CMAz8Ft6Dx8qkPQ8mpklomyjvyKSmMg0Jil0QqvrvU0qLBnvy+e4cn5UMstcMJiM8y9gW1djxFppc0VYGz7JpyAo0c1eLUjTznR/gAmOJSmuU6p127Fk5+GR4ZIJXZE/xD9fP5hRPbCkN9bA1ZGVzRFWKXuCL9BxitQxYzNCht1Q8jJJDUbYuYLHtHOzLUwbN/8ku/F0/eFiUfK8PuNfWGEvSjxjq4/W0W9saxgM0q+C6/F39CY7tJbVXlK6JGxQhFXgPtqL4ecCS3hKTNFjRMQhriJcZChkXSoFmGcrbxgGnpzJocrJ1ZL3c9DuiNQ4P2wKhWdTeDv8x4NbIdAhzTSBTmNW2Ik3L2+T9rvVYq+nkXLFkX7bGh4JgL0+n7AWyZ5iM9sI8jrVXPhCsrvUXpDJx5EcCAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "SandboxServiceLoadBalancerDNSC1BBDF52": {
+   "Value": {
+    "Fn::GetAtt": [
+     "SandboxServiceLB37D1042A",
+     "DNSName"
+    ]
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
