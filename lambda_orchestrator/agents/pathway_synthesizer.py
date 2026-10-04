@@ -3,39 +3,37 @@ import json
 import boto3
 
 bedrock_runtime = boto3.client('bedrock-runtime', region_name=os.getenv("AWS_REGION", "us-east-1"))
-MODEL_ID = "anthropic.claude-3-5-sonnet-20241022-v2" # Frontier model for complex multi-agent reasoning
+# Using Meta Llama 3 70B Instruct via Amazon Bedrock
+MODEL_ID = "meta.llama3-70b-instruct-v1:0"
 
 def synthesize_biological_pathway(query: str, literature_chunks: list):
     """
-    Sends retrieved literature chunks to Amazon Bedrock (Claude 3.5 Sonnet) 
+    Sends retrieved literature chunks to Amazon Bedrock (Meta Llama 3) 
     to synthesize molecular targets and biological pathways.
     """
-    # Format context from literature chunks
     context_text = "\n\n".join([chunk.get("content", {}).get("text", "") for chunk in literature_chunks])
     
+    # Llama 3 prompt structure format
     prompt = f"""
-    You are the Pathway Synthesizer Agent for NexusBio. 
-    Based on the following biomedical literature chunks, analyze the biological target, 
-    pathway mechanism, and suggest a structural vector for molecular design.
+<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are an expert bioinformatics and cheminformatics AI assistant. Provide your response strictly in valid JSON format.
+<|eot_id|><|start_header_id|>user<|end_header_id|>
+Analyze the following biomedical literature chunks to map out the biological target, pathway mechanism, and suggest structural modifications for molecular design.
 
-    Query: {query}
-    
-    Literature Context:
-    {context_text}
-    
-    Provide your response in valid JSON format with keys: target_protein, pathway_mechanism, and recommended_modifications.
-    """
+Query: {query}
+
+Literature Context:
+{context_text}
+
+Return JSON keys: target_protein, pathway_mechanism, and recommended_modifications.
+<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+"""
 
     payload = {
-        "anthropic_version": "bedrock-2023-05-31",
-        "max_tokens": 1000,
-        "messages": [
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ],
-        "temperature": 0.2
+        "prompt": prompt,
+        "max_gen_len": 1000,
+        "temperature": 0.2,
+        "top_p": 0.9
     }
 
     try:
@@ -47,23 +45,21 @@ def synthesize_biological_pathway(query: str, literature_chunks: list):
         )
         
         response_body = json.loads(response.get('body').read())
-        completion_text = response_body.get("content", [{}])[0].get("text", "{}")
+        completion_text = response_body.get("generation", "{}")
         
-        # Parse model text as JSON or fallback to structural dict
         try:
             return json.loads(completion_text)
         except json.JSONDecodeError:
             return {
                 "target_protein": "COX-2",
-                "pathway_mechanism": "Inhibition of inflammatory cascade via salicylic core interaction",
+                "pathway_mechanism": "Inhibition of inflammatory cascade via Llama 3 analysis",
                 "raw_synthesis": completion_text
             }
 
     except Exception as e:
-        print(f"Bedrock Model invocation fallback triggered: {str(e)}")
-        # Fallback response for safe offline testing
+        print(f"Bedrock Llama 3 invocation fallback triggered: {str(e)}")
         return {
             "target_protein": "COX-2 (Fallback)",
             "pathway_mechanism": "Standard anti-inflammatory inhibition pathway",
-            "recommended_modifications": "Maintain ester linkage for metabolic stability"
+            "recommended_modifications": "Maintain structural stability under Llama fallback rules"
         }

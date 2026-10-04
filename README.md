@@ -4,7 +4,7 @@
 
 ## Architecture Overview (Service Mapping)
 
-1. **Foundation Models & Orchestration**: Uses Amazon Bedrock (Claude 3.5 Sonnet & Claude 3 Haiku) via a unified API, orchestrated via serverless code on AWS Lambda.
+1. **Foundation Models & Orchestration**: Uses Amazon Bedrock hosting **Meta Llama 3** models via a unified API, orchestrated via serverless code on AWS Lambda.
 2. **Data & Knowledge Layer (RAG & Multi-Omics)**: Bedrock Knowledge Bases backed by Amazon OpenSearch Serverless, alongside an S3 Data Lake for raw abstracts and research files.
 3. **Cheminformatics Execution Sandbox**: A dedicated AWS ECS Fargate container bundled with Python and RDKit to safely execute and evaluate SMILES string properties.
 4. **Governance & HITL Gate**: Amazon Cognito for user authentication, DynamoDB for immutable audit trails and system state history, and a Streamlit frontend hosted on AWS Amplify.
