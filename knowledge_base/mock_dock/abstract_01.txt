@@ -1,1 +1,0 @@
-Recent high-throughput multi-omics profiling reveals that upregulation of Target-X heavily drives extracellular matrix deposition in Idiopathic Pulmonary Fibrosis. Knockdown studies demonstrate significant reduction in fibrotic markers.
