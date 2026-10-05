@@ -17,41 +17,40 @@
 ```text
 nexusbio/
 ├── .env.example
+├── .gitignore
+├── Dockerfile                          # Root container file for AWS Lambda Orchestrator
+├── docker-compose.yaml                 # Local multi-container orchestrator (Frontend + Sandbox)
 ├── README.md
 ├── requirements.txt
 │
-├── frontend/                             # [Point 4] Governance & HITL Gate (Streamlit on AWS Amplify)
+├── frontend/                           # Governance & HITL Gate (Streamlit)
 │   ├── app.py
-│   ├── Dockerfile 
+│   ├── Dockerfile                      # Dedicated container build for the UI dashboard
 │   └── requirements.txt
 │
-├── lambda_orchestrator/                  # [Point 1] Foundation Models & Orchestration (AWS Lambda + Multi-Agent)
-│   ├── handler.py
+├── lambda_orchestrator/                # Foundation Models & Orchestration (AWS Lambda + Agents)
+│   ├── handler.py                      # Main Lambda entry point
 │   ├── requirements.txt
 │   └── agents/
 │       ├── __init__.py
-│       ├── literature_miner.py           # Uses Bedrock & OpenSearch Serverless [2]
-│       ├── pathway_synthesizer.py        # Uses Bedrock Claude 3.5 Sonnet
-│       └── molecular_design.py           # Calls the Cheminformatics Sandbox [3]
+│       ├── literature_miner.py         # Interacts with Bedrock & OpenSearch Serverless[cite: 2]
+│       ├── pathway_synthesizer.py      # Synthesizes pathways via Llama 3 / Claude
+│       └── molecular_design.py         # Interfaces with the Cheminformatics Sandbox[cite: 3]
 │
-├── cheminformatics_sandbox/              # [Point 3] Cheminformatics Execution Sandbox (ECS Fargate + RDKit Container)
-│   ├── Dockerfile                        # Mandatory here for compiled C++ / RDKit binaries
-│   ├── main.py                           # FastAPI wrapper for SMILES evaluation
+├── cheminformatics_sandbox/            # Cheminformatics Execution Sandbox (ECS Fargate + RDKit)
+│   ├── Dockerfile                      # Mandatory for compiled C++ / RDKit binaries[cite: 3]
+│   ├── main.py                         # FastAPI wrapper for SMILES evaluation[cite: 3]
 │   ├── requirements.txt
 │   └── utils/
 │       └── descriptors.py
 │
-├── knowledge_base/                       # [Point 2] Data & Knowledge Layer (Mock literature chunks & PDFs)
-│   ├── raw_documents/
-│   └── processed_chunks/
-│
-└── infrastructure/                       # AWS CDK (TypeScript) provisioning Points 1 through 4
+└── infrastructure/                     # AWS CDK (TypeScript) infrastructure-as-code
     ├── bin/
-    │   └── nexusbio.ts                   # CDK application entry point
+    │   └── nexusbio.ts                 # CDK application entry point
     └── lib/
-        ├── networking_stack.ts           # VPC, Subnets & Internal routing for Lambda-to-Sandbox communication
-        ├── storage_stack.ts              # S3 Data Lake, DynamoDB Audit Trail , OpenSearch Serverless
-        └── compute_stack.ts              # Lambda Orchestrator & ECS Fargate Sandbox Service
+        ├── networking_stack.ts         # VPC, Subnets & Internal routing for Lambda-to-Sandbox
+        ├── storage_stack.ts            # S3 Data Lake, DynamoDB Audit Trail & OpenSearch Serverless
+        └── compute_stack.ts            # Lambda Orchestrator & ECS Fargate Sandbox Service
 
 ```
 
