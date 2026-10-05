@@ -22,6 +22,7 @@ nexusbio/
 │
 ├── frontend/                             # [Point 4] Governance & HITL Gate (Streamlit on AWS Amplify)
 │   ├── app.py
+│   ├── Dockerfile 
 │   └── requirements.txt
 │
 ├── lambda_orchestrator/                  # [Point 1] Foundation Models & Orchestration (AWS Lambda + Multi-Agent)
