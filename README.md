@@ -41,8 +41,7 @@ NexusBio bridges exact computational modeling with real-world biological enginee
        * `app.py` builds an interactive, multi-tab web application called NexusBio - HITL Research Dashboard using Streamlit. It simulates a control panel designed for biomedical researchers, safety officers, and auditors to monitor automated multi-agent workflows.
        * `Dockerfile` packages this Python 3.11 Streamlit application into a lightweight container, exposing port 8501 so it can be deployed on cloud services like AWS Amplify or ECS.
     * `infrastructure/` - Infrastructure configurations and deployment files.
-        ## Project Root & Configuration Files
-
+    
         * **`package.json`**: Defines the project metadata, build scripts (`build`, `watch`, `test`, `cdk`), and project dependencies like `aws-cdk-lib` and `constructs`.
 
 
@@ -59,25 +58,19 @@ NexusBio bridges exact computational modeling with real-world biological enginee
 
         ---
 
-        ## Entry Point (`bin/`)
+        ### Entry Point (`bin/`)
 
         * **`nexusbio.ts`** (and compiled **`nexusbio.js` / `nexusbio.d.ts**`): The main entry point for the CDK application. It instantiates the CDK `App`, defines the AWS environment region/account, creates instances of the Networking, Storage, and Compute stacks, and establishes explicit inter-stack dependencies.
 
         ---
 
-        ## Infrastructure Stacks (`lib/`)
-
-        ### Networking Stack
+        ### Infrastructure Stacks (`lib/`)
 
         * **`networking_stack.ts`** (and compiled **`networking_stack.js` / `networking_stack.d.ts**`): Defines the custom VPC (`NexusBioVPC`) with public subnets and private subnets with egress via a NAT gateway to safely isolate internal workloads.
 
-        ### Storage Stack
-
         * **`storage_stack.ts`** (and compiled **`storage_stack.js` / `storage_stack.d.ts**`): Manages persistent data resources, including an S3 Data Lake bucket, a DynamoDB audit trail table, and an OpenSearch Serverless vector store collection (`nexusbio-literature-vector-store`) complete with encryption and network security policies.
 
-        ### Compute Stack
-
-        * **`compute_stack.ts`** (and compiled **`compute_stack.js` / `compute_stack.d.ts**`): Deploys compute workloads inside the VPC, including an ECS Fargate cluster running a cheminformatics sandbox behind an internal load balancer, and a Python Lambda orchestrator with least-privilege permissions to access the S3 bucket and DynamoDB table.
+        * **`compute_stack.ts`** (and compiled `compute_stack.js` / `compute_stack.d.ts`): Deploys compute workloads inside the VPC, including an ECS Fargate cluster running a cheminformatics sandbox behind an internal load balancer, and a Python Lambda orchestrator with least-privilege permissions to access the S3 bucket and DynamoDB table.
             
 ---
 
