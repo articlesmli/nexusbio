@@ -24,7 +24,7 @@ NexusBio bridges exact computational modeling with real-world biological enginee
 * **How it helps:** Employs multi-agent synthesis to explore metabolic routes and identify biological targets.
 * **Relevant Files & Components:**
     * `lambda_orchestrator/` - Serverless code handling multi-agent workflows and model coordination.
-    * `knoledge_base/` - Manages data components for automated literature mining and retrieval.
+
 
 ### 2. Pre-Clinical Work (Simulation & Molecular Optimisation)
 * **What it covers:** Dynamic pathway simulation, kinetic modeling, and safe cheminformatics execution.
@@ -32,12 +32,14 @@ NexusBio bridges exact computational modeling with real-world biological enginee
 * **Relevant Files & Components:**
     * `cheminformatics_sandbox/` - Dedicated workspace for safely executing and evaluating cheminformatics and SMILES string properties.
 
+
 ### 3. Validation & User Interface Loops
 * **What it covers:** Data interpretation, workflow orchestration, and user interaction.
 * **How it helps:** Provides an interactive interface for users to oversee and run complex biological and chemical workflows.
 * **Relevant Files & Components:**
     * `frontend/` - User interface components for interacting with the platform.
     * `infrastructure/` - Infrastructure configurations and deployment files.
+    
 ---
 
 ## Project File Tree
