@@ -25,7 +25,7 @@ NexusBio bridges exact computational modeling with real-world biological enginee
 * **Relevant Files & Components:**
     * `lambda_orchestrator/` - Serverless code handling multi-agent workflows and model coordination.
         * **`handler.py`**: Serves as the main AWS Lambda entrypoint (`lambda_handler`) that orchestrates the multi-agent loop, coordinates the literature mining and molecular evaluation agents, and records immutable activity logs to the DynamoDB audit trail table.
-        
+
         `agents/` 
         * **`literature_miner.py`**: Queries the Amazon Bedrock Knowledge Base (backed by OpenSearch Serverless) to search through biomedical literature using the `retrieve` API, providing a fallback mock data chunk for local development.
         * **`molecular_design.py`**: Communicates with the ECS Fargate Cheminformatics Sandbox by sending compound SMILES strings via an HTTP POST request for property evaluation, including a fallback mock response if the sandbox container is offline.
@@ -73,6 +73,22 @@ NexusBio bridges exact computational modeling with real-world biological enginee
         * **`compute_stack.ts`** (and compiled `compute_stack.js` / `compute_stack.d.ts`): Deploys compute workloads inside the VPC, including an ECS Fargate cluster running a cheminformatics sandbox behind an internal load balancer, and a Python Lambda orchestrator with least-privilege permissions to access the S3 bucket and DynamoDB table.
             
 ---
+
+## CI/CD & Automated Testing
+
+NexusBio features a fully automated continuous integration and continuous deployment (CI/CD) pipeline built with **GitHub Actions** and secured via **AWS OIDC** (OpenID Connect) authentication.
+
+* **Automated Quality Checks (`ci-cd.yml`):**
+  * **Python Unit Testing:** Automatically provisions Python, installs RDKit cheminformatics dependencies, and executes the `pytest` suite for descriptor logic and API endpoint validation.
+  * **Infrastructure Validation:** Automatically builds, lints, and validates the TypeScript AWS CDK infrastructure code on every pull request and push to `main`.
+  * **Security & Deployment:** Uses secure, tokenless AWS OIDC IAM assumption to orchestrate cloud infrastructure deployments.
+
+To run the test suite locally:
+```bash
+# Run cheminformatics and API tests
+PYTHONPATH=cheminformatics_sandbox pytest cheminformatics_sandbox/tests/
+
+
 
 ## Project File Tree
 
