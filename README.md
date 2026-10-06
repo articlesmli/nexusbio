@@ -95,6 +95,9 @@ PYTHONPATH=cheminformatics_sandbox pytest cheminformatics_sandbox/tests/
 ```text
 nexusbio/
 ├── .env.example
+├── .github/                            # GitHub configuration folder
+│   └── workflows/                      # GitHub Actions workflows folder
+│       └── ci-cd.yml                   # Main CI/CD automation pipeline script
 ├── .gitignore
 ├── Dockerfile                          # Root container file for AWS Lambda Orchestrator
 ├── docker-compose.yaml                 # Local multi-container orchestrator (Frontend + Sandbox)
@@ -102,7 +105,7 @@ nexusbio/
 ├── requirements.txt
 │
 ├── frontend/                           # Governance & HITL Gate (Streamlit)
-│   ├── app.py
+│   ├── app.py                          # Streamlit dashboard script
 │   ├── Dockerfile                      # Dedicated container build for the UI dashboard
 │   └── requirements.txt
 │
@@ -111,16 +114,17 @@ nexusbio/
 │   ├── requirements.txt
 │   └── agents/
 │       ├── __init__.py
-│       ├── literature_miner.py         # Interacts with Bedrock & OpenSearch Serverless[cite: 2]
+│       ├── literature_miner.py         # Interacts with Bedrock & OpenSearch Serverless
 │       ├── pathway_synthesizer.py      # Synthesises pathways via Llama 3 / Claude
-│       └── molecular_design.py         # Interfaces with the Cheminformatics Sandbox[cite: 3]
+│       └── molecular_design.py         # Interfaces with the Cheminformatics Sandbox
 │
 ├── cheminformatics_sandbox/            # Cheminformatics Execution Sandbox (ECS Fargate + RDKit)
-│   ├── Dockerfile                      # Mandatory for compiled C++ / RDKit binaries[cite: 3]
-│   ├── main.py                         # FastAPI wrapper for SMILES evaluation[cite: 3]
+│   ├── Dockerfile                      # App Dockerfile (uses the base image & copies code)
+│   ├── Dockerfile.base                 # Base Dockerfile (installs C++ toolchain & RDKit once)
+│   ├── main.py                         # FastAPI wrapper for SMILES evaluation
 │   ├── requirements.txt
 │   └── utils/
-│       └── descriptors.py
+│       └── descriptors.py              # Cheminformatics validation & descriptor calculations
 │
 └── infrastructure/                     # AWS CDK (TypeScript) infrastructure-as-code
     ├── bin/

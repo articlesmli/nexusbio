@@ -1,22 +1,10 @@
-FROM python:3.11-slim
+# Point to your own ECR base image instead of python:3.11-slim
+FROM 089340569022.dkr.ecr.eu-west-2.amazonaws.com/nexusbio-sandbox-base:latest
 
 WORKDIR /app
 
-# Install base system libraries required by RDKit rendering/binaries
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    libgl1 \
-    libxrender1 \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy and install python requirements
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy application source code
-COPY . .
+# Copy only your lightweight code (main.py, utils/, etc.)
+COPY . /app/
 
 EXPOSE 8000
-
-# Run FastAPI via Uvicorn
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -1,0 +1,29 @@
+{
+    "Role": {
+        "Path": "/",
+        "RoleName": "NexusBioGitHubActionRole",
+        "RoleId": "AROARJTI44W7LUNQFKZMV",
+        "Arn": "arn:aws:iam::089340569022:role/NexusBioGitHubActionRole",
+        "CreateDate": "2026-10-06T15:36:24+00:00",
+        "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Principal": {
+                        "Federated": "arn:aws:iam::089340569022:oidc-provider/token.actions.githubusercontent.com"
+                    },
+                    "Action": "sts:AssumeRoleWithWebIdentity",
+                    "Condition": {
+                        "StringEquals": {
+                            "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+                        },
+                        "StringLike": {
+                            "token.actions.githubusercontent.com:sub": "repo:*"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,27 @@
+----------------------------------------------------------------------
+|                              ListRoles                             |
++--------------------------------------------------------------------+
+|  [1m[34mAWSServiceRoleForAmazonEKS[0m                                        |
+|  [1m[34mAWSServiceRoleForAmazonEKSNodegroup[0m                               |
+|  [1m[34mAWSServiceRoleForAmazonOpenSearchServerless[0m                       |
+|  [1m[34mAWSServiceRoleForAutoScaling[0m                                      |
+|  [1m[34mAWSServiceRoleForECS[0m                                              |
+|  [1m[34mAWSServiceRoleForElasticLoadBalancing[0m                             |
+|  [1m[34mAWSServiceRoleForRDS[0m                                              |
+|  [1m[34mAWSServiceRoleForResourceExplorer[0m                                 |
+|  [1m[34mAWSServiceRoleForSupport[0m                                          |
+|  [1m[34mAWSServiceRoleForTrustedAdvisor[0m                                   |
+|  [1m[34mcdk-hnb659fds-cfn-exec-role-089340569022-eu-west-2[0m                |
+|  [1m[34mcdk-hnb659fds-cfn-exec-role-089340569022-us-east-1[0m                |
+|  [1m[34mcdk-hnb659fds-deploy-role-089340569022-eu-west-2[0m                  |
+|  [1m[34mcdk-hnb659fds-deploy-role-089340569022-us-east-1[0m                  |
+|  [1m[34mcdk-hnb659fds-file-publishing-role-089340569022-eu-west-2[0m         |
+|  [1m[34mcdk-hnb659fds-file-publishing-role-089340569022-us-east-1[0m         |
+|  [1m[34mcdk-hnb659fds-image-publishing-role-089340569022-eu-west-2[0m        |
+|  [1m[34mcdk-hnb659fds-image-publishing-role-089340569022-us-east-1[0m        |
+|  [1m[34mcdk-hnb659fds-lookup-role-089340569022-eu-west-2[0m                  |
+|  [1m[34mcdk-hnb659fds-lookup-role-089340569022-us-east-1[0m                  |
+|  [1m[34mml-eks-cluster-role[0m                                               |
+|  [1m[34mml-eks-node-role[0m                                                  |
+|  [1m[34mNexusBioStorageStack-CustomS3AutoDeleteObjectsCusto-98wYcVa12P2e[0m  |
++--------------------------------------------------------------------+
