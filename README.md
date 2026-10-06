@@ -1,14 +1,37 @@
 
-`nexusbio` is a multi-agent biomedical research and cheminformatics workflow orchestrator built on AWS[cite: 5]. It automates literature mining, biological pathway synthesis, and molecular design using Amazon Bedrock frontier models, custom RDKit execution sandboxes, and a human-in-the-loop (HITL) dashboard.
+## Nexus-Bio Overview
+
+`nexusbio` is a multi-agent biomedical research and cheminformatics workflow orchestrator built on AWS. It automates literature mining, biological pathway synthesis, and molecular design using Amazon Bedrock frontier models, custom RDKit execution sandboxes, and a human-in-the-loop (HITL) dashboard.
 
 ---
 
 ## Architecture Overview (Service Mapping)
 
-1. **Foundation Models & Orchestration**: Uses Amazon Bedrock hosting **Meta Llama 3** models via a unified API, orchestrated via serverless code on AWS Lambda.
-2. **Data & Knowledge Layer (RAG & Multi-Omics)**: Bedrock Knowledge Bases backed by Amazon OpenSearch Serverless, alongside an S3 Data Lake for raw abstracts and research files.
-3. **Cheminformatics Execution Sandbox**: A dedicated AWS ECS Fargate container bundled with Python and RDKit to safely execute and evaluate SMILES string properties.
-4. **Governance & HITL Gate**: Amazon Cognito for user authentication, DynamoDB for immutable audit trails and system state history, and a Streamlit frontend hosted on AWS Amplify.
+* **Foundation Models & Orchestration:** Uses Amazon Bedrock hosting frontier models via a unified API, orchestrated via serverless code on AWS Lambda.
+* **Data & Knowledge Layer (RAG & Multi-Omics):** Bedrock Knowledge Bases backed by Amazon OpenSearch Serverless, alongside an S3 Data Lake for raw abstracts and research files.
+* **Cheminformatics Execution Sandbox:** A dedicated AWS ECS Fargate container bundled with Python and RDKit to safely execute and evaluate SMILES string properties.
+* **Governance & HITL Gate:** Amazon Cognito for user authentication, DynamoDB for immutable audit trails and system state history, and a Streamlit frontend hosted on AWS Amplify.
+
+---
+
+## R&D Pipeline Alignment
+
+Nexus-Bio bridges exact computational modeling with real-world biological engineering. The platform's engines map directly to key stages of the biotechnology and pharmaceutical R&D lifecycle:
+
+### 1. Early Research (Pathway Design & Discovery)
+
+* **What it covers:** Constructing metabolic routes, designing synthetic biological circuits, and running automated literature mining via Bedrock and OpenSearch.
+* **How it helps:** Employs constraint-based flux optimization, mass-balance calculations, and multi-agent synthesis to explore metabolic routes and identify biological targets.
+
+### 2. Pre-Clinical Work (Simulation & Molecular Optimization)
+
+* **What it covers:** Dynamic pathway simulation, kinetic modeling, and safe cheminformatics execution.
+* **How it helps:** Leverages isolated AWS ECS Fargate containers running Python and RDKit to execute and evaluate SMILES string properties, predicting molecular characteristics before physical lab testing.
+
+### 3. Validation & Governance Loops (HITL & Audit Trails)
+
+* **What it covers:** Data interpretation, immutable tracking, and human-in-the-loop (HITL) validation.
+* **How it helps:** Utilizes DynamoDB audit trails and a Streamlit frontend to ensure full compliance, safety checks, and seamless human oversight throughout complex biological and chemical workflows.
 
 ---
 
