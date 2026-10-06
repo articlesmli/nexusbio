@@ -87,7 +87,7 @@ To run the test suite locally:
 ```bash
 # Run cheminformatics and API tests
 PYTHONPATH=cheminformatics_sandbox pytest cheminformatics_sandbox/tests/
-
+```
 
 
 ## Project File Tree
