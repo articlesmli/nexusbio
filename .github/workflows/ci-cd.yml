@@ -36,7 +36,7 @@ jobs:
 
       - name: Run Pytest Suite
         run: |
-          PYTHONPATH=cheminformatics_sandbox pytest cheminformatics_sandbox/tests/
+          PYTHONPATH=. pytest cheminformatics_sandbox/tests/
 
   test-infrastructure:
     runs-on: ubuntu-latest
