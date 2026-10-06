@@ -42,7 +42,7 @@ jobs:
 
       - name: Run Pytest Suite
         run: |
-          pytest || echo "No tests configured yet, add them in tests/!"
+          PYTHONPATH=cheminformatics_sandbox pytest cheminformatics_sandbox/tests/
 
   # ==========================================
   # JOB 2: Test Infrastructure (CDK & TypeScript)
