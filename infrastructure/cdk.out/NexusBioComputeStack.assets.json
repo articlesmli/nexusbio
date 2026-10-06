@@ -16,16 +16,16 @@
         }
       }
     },
-    "2c963f1bd51dcf4477cf3e58849f40adf89d937def58bb506407855ee1493baf": {
+    "917005cebe6e2ac5e5250903bf54e31f8ba9fb0aabefc1c82e75e71d2632595b": {
       "displayName": "NexusBioComputeStack Template",
       "source": {
         "path": "NexusBioComputeStack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "089340569022-us-east-1-37478e01": {
+        "089340569022-us-east-1-795e0f0d": {
           "bucketName": "cdk-hnb659fds-assets-089340569022-us-east-1",
-          "objectKey": "2c963f1bd51dcf4477cf3e58849f40adf89d937def58bb506407855ee1493baf.json",
+          "objectKey": "917005cebe6e2ac5e5250903bf54e31f8ba9fb0aabefc1c82e75e71d2632595b.json",
           "region": "us-east-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-file-publishing-role-089340569022-us-east-1"
         }
@@ -33,15 +33,15 @@
     }
   },
   "dockerImages": {
-    "de0ebe8a3f4ee1650700854d98b5c41f8da51ab4d4d14466a71884577ef33f36": {
+    "14f64c57ceb8723ca29fde732f47706af584e207092473258304a3337e19d2b3": {
       "displayName": "SandboxService/TaskDef/web/AssetImage",
       "source": {
-        "directory": "asset.de0ebe8a3f4ee1650700854d98b5c41f8da51ab4d4d14466a71884577ef33f36"
+        "directory": "asset.14f64c57ceb8723ca29fde732f47706af584e207092473258304a3337e19d2b3"
       },
       "destinations": {
-        "089340569022-us-east-1-af729b3b": {
+        "089340569022-us-east-1-18ca5be7": {
           "repositoryName": "cdk-hnb659fds-container-assets-089340569022-us-east-1",
-          "imageTag": "de0ebe8a3f4ee1650700854d98b5c41f8da51ab4d4d14466a71884577ef33f36",
+          "imageTag": "14f64c57ceb8723ca29fde732f47706af584e207092473258304a3337e19d2b3",
           "region": "us-east-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-image-publishing-role-089340569022-us-east-1"
         }

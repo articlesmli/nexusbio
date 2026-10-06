@@ -8,8 +8,8 @@ import { ComputeStack } from '../lib/compute_stack';
 const app = new cdk.App();
 
 const env = {
-  account: process.env.CDK_DEFAULT_ACCOUNT,
-  region: process.env.CDK_DEFAULT_REGION || 'us-east-1',
+  account: '089340569022',
+  region: process.env.CDK_DEFAULT_REGION || 'eu-west-2'
 };
 
 // 1. Networking Stack (VPC & Subnets)
