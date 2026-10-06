@@ -77,6 +77,14 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
+      - name: Build and Push Base RDKit Image
+        working-directory: ./cheminformatics_sandbox
+        run: |
+          aws ecr describe-repositories --repository-names nexusbio-sandbox-base || aws ecr create-repository --repository-names nexusbio-sandbox-base
+          docker build -f Dockerfile.base -t nexusbio-sandbox-base:latest .
+          docker tag nexusbio-sandbox-base:latest 089340569022.dkr.ecr.eu-west-2.amazonaws.com/nexusbio-sandbox-base:latest
+          docker push 089340569022.dkr.ecr.eu-west-2.amazonaws.com/nexusbio-sandbox-base:latest
+
       - name: Set up Node.js for CDK
         uses: actions/setup-node@v4
         with:
