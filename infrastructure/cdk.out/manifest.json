@@ -11,21 +11,21 @@
     },
     "NexusBioNetworkingStack": {
       "type": "aws:cloudformation:stack",
-      "environment": "aws://089340569022/us-east-1",
+      "environment": "aws://089340569022/eu-west-2",
       "properties": {
         "templateFile": "NexusBioNetworkingStack.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-deploy-role-089340569022-us-east-1",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-cfn-exec-role-089340569022-us-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-089340569022-us-east-1/9b850fc6836f27494ce10600849996da9171ffde9726891e98f88b4a1138da50.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-deploy-role-089340569022-eu-west-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-cfn-exec-role-089340569022-eu-west-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-089340569022-eu-west-2/90a8fd405be0e2eb656744ac7a0af190e95685783f30be0dd9fb59ffe5c09718.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
           "NexusBioNetworkingStack.assets"
         ],
         "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-lookup-role-089340569022-us-east-1",
+          "arn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-lookup-role-089340569022-eu-west-2",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }
@@ -46,21 +46,21 @@
     },
     "NexusBioStorageStack": {
       "type": "aws:cloudformation:stack",
-      "environment": "aws://089340569022/us-east-1",
+      "environment": "aws://089340569022/eu-west-2",
       "properties": {
         "templateFile": "NexusBioStorageStack.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-deploy-role-089340569022-us-east-1",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-cfn-exec-role-089340569022-us-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-089340569022-us-east-1/767e1fbd0491ae0764e48f9babe461aab982aaf4274ee6b6d4b56d299ce38c7f.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-deploy-role-089340569022-eu-west-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-cfn-exec-role-089340569022-eu-west-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-089340569022-eu-west-2/039c2628aff24ebd0dd8ad6276bfb8179a4dc5788b4840927eb67eb513c66589.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
           "NexusBioStorageStack.assets"
         ],
         "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-lookup-role-089340569022-us-east-1",
+          "arn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-lookup-role-089340569022-eu-west-2",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }
@@ -81,21 +81,21 @@
     },
     "NexusBioComputeStack": {
       "type": "aws:cloudformation:stack",
-      "environment": "aws://089340569022/us-east-1",
+      "environment": "aws://089340569022/eu-west-2",
       "properties": {
         "templateFile": "NexusBioComputeStack.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-deploy-role-089340569022-us-east-1",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-cfn-exec-role-089340569022-us-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-089340569022-us-east-1/917005cebe6e2ac5e5250903bf54e31f8ba9fb0aabefc1c82e75e71d2632595b.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-deploy-role-089340569022-eu-west-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-cfn-exec-role-089340569022-eu-west-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-089340569022-eu-west-2/3ed27283d06967b335e3c1e1d4171bd70638205399b083148fc778c837cf9326.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
           "NexusBioComputeStack.assets"
         ],
         "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-lookup-role-089340569022-us-east-1",
+          "arn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-lookup-role-089340569022-eu-west-2",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }

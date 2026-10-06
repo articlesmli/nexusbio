@@ -92,7 +92,7 @@
      {
       "Essential": true,
       "Image": {
-       "Fn::Sub": "089340569022.dkr.ecr.us-east-1.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-089340569022-us-east-1:14f64c57ceb8723ca29fde732f47706af584e207092473258304a3337e19d2b3"
+       "Fn::Sub": "089340569022.dkr.ecr.eu-west-2.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-089340569022-eu-west-2:14f64c57ceb8723ca29fde732f47706af584e207092473258304a3337e19d2b3"
       },
       "LogConfiguration": {
        "LogDriver": "awslogs",
@@ -101,7 +101,7 @@
          "Ref": "SandboxServiceTaskDefwebLogGroup78E4594A"
         },
         "awslogs-stream-prefix": "SandboxService",
-        "awslogs-region": "us-east-1"
+        "awslogs-region": "eu-west-2"
        }
       },
       "Name": "web",
@@ -185,7 +185,7 @@
           {
            "Ref": "AWS::Partition"
           },
-          ":ecr:us-east-1:089340569022:repository/cdk-hnb659fds-container-assets-089340569022-us-east-1"
+          ":ecr:eu-west-2:089340569022:repository/cdk-hnb659fds-container-assets-089340569022-eu-west-2"
          ]
         ]
        }
@@ -439,7 +439,7 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "S3Bucket": "cdk-hnb659fds-assets-089340569022-us-east-1",
+     "S3Bucket": "cdk-hnb659fds-assets-089340569022-eu-west-2",
      "S3Key": "12edc767124a7c73df2ca5e79dd933ce4ef3b6ac8a629a88eb7e61fcc741641e.zip"
     },
     "Environment": {

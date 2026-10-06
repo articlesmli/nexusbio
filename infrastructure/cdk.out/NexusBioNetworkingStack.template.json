@@ -21,7 +21,7 @@
   "NexusBioVPCPublicSubnetSubnet1SubnetC4C77E4C": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": "us-east-1a",
+    "AvailabilityZone": "eu-west-2a",
     "CidrBlock": "10.0.0.0/24",
     "MapPublicIpOnLaunch": true,
     "Tags": [
@@ -140,7 +140,7 @@
   "NexusBioVPCPublicSubnetSubnet2SubnetE8BF887B": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": "us-east-1b",
+    "AvailabilityZone": "eu-west-2b",
     "CidrBlock": "10.0.1.0/24",
     "MapPublicIpOnLaunch": true,
     "Tags": [
@@ -217,7 +217,7 @@
   "NexusBioVPCPrivateSubnetSubnet1SubnetD697271F": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": "us-east-1a",
+    "AvailabilityZone": "eu-west-2a",
     "CidrBlock": "10.0.2.0/24",
     "MapPublicIpOnLaunch": false,
     "Tags": [
@@ -291,7 +291,7 @@
   "NexusBioVPCPrivateSubnetSubnet2Subnet29FC0BF9": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "AvailabilityZone": "us-east-1b",
+    "AvailabilityZone": "eu-west-2b",
     "CidrBlock": "10.0.3.0/24",
     "MapPublicIpOnLaunch": false,
     "Tags": [

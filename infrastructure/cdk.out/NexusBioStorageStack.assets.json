@@ -8,26 +8,26 @@
         "packaging": "zip"
       },
       "destinations": {
-        "089340569022-us-east-1-62130d47": {
-          "bucketName": "cdk-hnb659fds-assets-089340569022-us-east-1",
+        "089340569022-eu-west-2-02784fac": {
+          "bucketName": "cdk-hnb659fds-assets-089340569022-eu-west-2",
           "objectKey": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip",
-          "region": "us-east-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-file-publishing-role-089340569022-us-east-1"
+          "region": "eu-west-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-file-publishing-role-089340569022-eu-west-2"
         }
       }
     },
-    "767e1fbd0491ae0764e48f9babe461aab982aaf4274ee6b6d4b56d299ce38c7f": {
+    "039c2628aff24ebd0dd8ad6276bfb8179a4dc5788b4840927eb67eb513c66589": {
       "displayName": "NexusBioStorageStack Template",
       "source": {
         "path": "NexusBioStorageStack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "089340569022-us-east-1-ae8da505": {
-          "bucketName": "cdk-hnb659fds-assets-089340569022-us-east-1",
-          "objectKey": "767e1fbd0491ae0764e48f9babe461aab982aaf4274ee6b6d4b56d299ce38c7f.json",
-          "region": "us-east-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-file-publishing-role-089340569022-us-east-1"
+        "089340569022-eu-west-2-4842fe8c": {
+          "bucketName": "cdk-hnb659fds-assets-089340569022-eu-west-2",
+          "objectKey": "039c2628aff24ebd0dd8ad6276bfb8179a4dc5788b4840927eb67eb513c66589.json",
+          "region": "eu-west-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-file-publishing-role-089340569022-eu-west-2"
         }
       }
     }

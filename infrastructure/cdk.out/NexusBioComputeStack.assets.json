@@ -8,26 +8,26 @@
         "packaging": "zip"
       },
       "destinations": {
-        "089340569022-us-east-1-4fc8d3d2": {
-          "bucketName": "cdk-hnb659fds-assets-089340569022-us-east-1",
+        "089340569022-eu-west-2-9ad9f7a0": {
+          "bucketName": "cdk-hnb659fds-assets-089340569022-eu-west-2",
           "objectKey": "12edc767124a7c73df2ca5e79dd933ce4ef3b6ac8a629a88eb7e61fcc741641e.zip",
-          "region": "us-east-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-file-publishing-role-089340569022-us-east-1"
+          "region": "eu-west-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-file-publishing-role-089340569022-eu-west-2"
         }
       }
     },
-    "917005cebe6e2ac5e5250903bf54e31f8ba9fb0aabefc1c82e75e71d2632595b": {
+    "3ed27283d06967b335e3c1e1d4171bd70638205399b083148fc778c837cf9326": {
       "displayName": "NexusBioComputeStack Template",
       "source": {
         "path": "NexusBioComputeStack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "089340569022-us-east-1-795e0f0d": {
-          "bucketName": "cdk-hnb659fds-assets-089340569022-us-east-1",
-          "objectKey": "917005cebe6e2ac5e5250903bf54e31f8ba9fb0aabefc1c82e75e71d2632595b.json",
-          "region": "us-east-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-file-publishing-role-089340569022-us-east-1"
+        "089340569022-eu-west-2-266d9b75": {
+          "bucketName": "cdk-hnb659fds-assets-089340569022-eu-west-2",
+          "objectKey": "3ed27283d06967b335e3c1e1d4171bd70638205399b083148fc778c837cf9326.json",
+          "region": "eu-west-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-file-publishing-role-089340569022-eu-west-2"
         }
       }
     }
@@ -39,11 +39,11 @@
         "directory": "asset.14f64c57ceb8723ca29fde732f47706af584e207092473258304a3337e19d2b3"
       },
       "destinations": {
-        "089340569022-us-east-1-18ca5be7": {
-          "repositoryName": "cdk-hnb659fds-container-assets-089340569022-us-east-1",
+        "089340569022-eu-west-2-da8c43c7": {
+          "repositoryName": "cdk-hnb659fds-container-assets-089340569022-eu-west-2",
           "imageTag": "14f64c57ceb8723ca29fde732f47706af584e207092473258304a3337e19d2b3",
-          "region": "us-east-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-image-publishing-role-089340569022-us-east-1"
+          "region": "eu-west-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-image-publishing-role-089340569022-eu-west-2"
         }
       }
     }
