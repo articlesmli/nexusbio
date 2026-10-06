@@ -24,9 +24,9 @@ Nexus-Bio bridges exact computational modeling with real-world biological engine
 * **What it covers:** Constructing metabolic routes, designing synthetic biological circuits, and running automated literature mining via Bedrock and OpenSearch.
 * **How it helps:** Employs constraint-based flux optimization, mass-balance calculations, and multi-agent synthesis to explore metabolic routes and identify biological targets.
 * **Relevant Files & Components:**
-    * `lambda/orchestrator/` — Serverless AWS Lambda code handling multi-agent workflows and Bedrock model coordination.
-    * `services/knowledge_base/` — Integrates Amazon Bedrock Knowledge Bases and OpenSearch Serverless for automated literature mining and RAG.
-    * `data/s3_lake/` — S3 Data Lake storing raw research abstracts and chemical datasets.
+    * `lambda/orchestrator/` - Serverless AWS Lambda code handling multi-agent workflows and Bedrock model coordination.
+    * `services/knowledge_base/` - Integrates Amazon Bedrock Knowledge Bases and OpenSearch Serverless for automated literature mining and RAG.
+    * `data/s3_lake/` - S3 Data Lake storing raw research abstracts and chemical datasets.
 
 
 
@@ -35,8 +35,8 @@ Nexus-Bio bridges exact computational modeling with real-world biological engine
 * **What it covers:** Dynamic pathway simulation, kinetic modeling, and safe cheminformatics execution.
 * **How it helps:** Leverages isolated AWS ECS Fargate containers running Python and RDKit to execute and evaluate SMILES string properties, predicting molecular characteristics before physical lab testing.
 * **Relevant Files & Components:**
-    * `containers/rdkit_sandbox/` — Dedicated AWS ECS Fargate container bundled with Python and RDKit for safe SMILES string evaluation and property calculations.
-    * `engines/simulation/` — Code handling kinetic modeling, flux optimization, and mass-balance calculations.
+    * `containers/rdkit_sandbox/` - Dedicated AWS ECS Fargate container bundled with Python and RDKit for safe SMILES string evaluation and property calculations.
+    * `engines/simulation/` - Code handling kinetic modeling, flux optimization, and mass-balance calculations.
 
 
 
@@ -45,9 +45,9 @@ Nexus-Bio bridges exact computational modeling with real-world biological engine
 * **What it covers:** Data interpretation, immutable tracking, and human-in-the-loop (HITL) validation.
 * **How it helps:** Utilizes DynamoDB audit trails and a Streamlit frontend to ensure full compliance, safety checks, and seamless human oversight throughout complex biological and chemical workflows.
 * **Relevant Files & Components:**
-    * `frontend/` — Streamlit application hosted on AWS Amplify providing the user interface and HITL control gates.
-    * `backend/governance/` — DynamoDB integration maintaining immutable audit trails and system state history.
-    * `auth/` — Amazon Cognito configuration handling user authentication and role-based access.
+    * `frontend/` - Streamlit application hosted on AWS Amplify providing the user interface and HITL control gates.
+    * `backend/governance/` - DynamoDB integration maintaining immutable audit trails and system state history.
+    * `auth/` - Amazon Cognito configuration handling user authentication and role-based access.
 
 ---
 
