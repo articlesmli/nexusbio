@@ -70,7 +70,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::123456789012:role/NexusBioGitHubActionRole
+          role-to-assume: arn:aws:iam::089340569022:role/NexusBioGitHubActionRole
           aws-region: eu-west-2
 
       - name: Login to Amazon ECR
