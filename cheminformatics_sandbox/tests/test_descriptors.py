@@ -1,5 +1,5 @@
 import pytest
-from utils.descriptors import calculate_molecular_metrics
+from cheminformatics_sandbox.utils.descriptors import calculate_molecular_metrics
 
 def test_valid_smiles_aspirin():
     """Test property calculations for a well-known molecule: Aspirin."""
