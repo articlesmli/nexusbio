@@ -80,8 +80,14 @@ jobs:
       - name: Build and Push Base RDKit Image
         working-directory: ./cheminformatics_sandbox
         run: |
-          aws ecr describe-repositories --repository-names nexusbio-sandbox-base || aws ecr create-repository --repository-names nexusbio-sandbox-base
+          # Safely check if the repository exists, and create it if it doesn't
+          aws ecr describe-repositories --repository-names nexusbio-sandbox-base || \
+          aws ecr create-repository --repository-name nexusbio-sandbox-base
+
+          # Build the base image
           docker build -f Dockerfile.base -t nexusbio-sandbox-base:latest .
+
+          # Tag and push to ECR
           docker tag nexusbio-sandbox-base:latest 089340569022.dkr.ecr.eu-west-2.amazonaws.com/nexusbio-sandbox-base:latest
           docker push 089340569022.dkr.ecr.eu-west-2.amazonaws.com/nexusbio-sandbox-base:latest
 
