@@ -1,5 +1,5 @@
 
-## Nexus-Bio Overview
+## NexusBio Overview
 
 `nexusbio` is a multi-agent biomedical research and cheminformatics workflow orchestrator built on AWS. It automates literature mining, biological pathway synthesis, and molecular design using Amazon Bedrock frontier models, custom RDKit execution sandboxes, and a human-in-the-loop (HITL) dashboard.
 
@@ -17,38 +17,27 @@
 
 ## R&D Pipeline Architecture Mapping
 
-Nexus-Bio bridges exact computational modeling with real-world biological engineering. The platform's engines map directly to key stages of the biotechnology and pharmaceutical R&D lifecycle, connecting to specific backend services and codebase directories:
+NexusBio bridges exact computational modeling with real-world biological engineering. The platform's engines map directly to key stages of the biotechnology and pharmaceutical R&D lifecycle, connecting to specific backend services and codebase directories:
 
 ### 1. Early Research (Pathway Design & Discovery)
-
-* **What it covers:** Constructing metabolic routes, designing synthetic biological circuits, and running automated literature mining via Bedrock and OpenSearch.
-* **How it helps:** Employs constraint-based flux optimization, mass-balance calculations, and multi-agent synthesis to explore metabolic routes and identify biological targets.
+* **What it covers:** Constructing metabolic routes, designing synthetic biological circuits, and running automated literature mining.
+* **How it helps:** Employs multi-agent synthesis to explore metabolic routes and identify biological targets.
 * **Relevant Files & Components:**
-    * `lambda/orchestrator/` - Serverless AWS Lambda code handling multi-agent workflows and Bedrock model coordination.
-    * `services/knowledge_base/` - Integrates Amazon Bedrock Knowledge Bases and OpenSearch Serverless for automated literature mining and RAG.
-    * `data/s3_lake/` - S3 Data Lake storing raw research abstracts and chemical datasets.
+    * `lambda_orchestrator/` - Serverless code handling multi-agent workflows and model coordination.
+    * `knoledge_base/` - Manages data components for automated literature mining and retrieval.
 
-
-
-### 2. Pre-Clinical Work (Simulation & Molecular Optimization)
-
+### 2. Pre-Clinical Work (Simulation & Molecular Optimisation)
 * **What it covers:** Dynamic pathway simulation, kinetic modeling, and safe cheminformatics execution.
-* **How it helps:** Leverages isolated AWS ECS Fargate containers running Python and RDKit to execute and evaluate SMILES string properties, predicting molecular characteristics before physical lab testing.
+* **How it helps:** Leverages isolated environments to execute and evaluate SMILES string properties and molecular characteristics before physical lab testing.
 * **Relevant Files & Components:**
-    * `containers/rdkit_sandbox/` - Dedicated AWS ECS Fargate container bundled with Python and RDKit for safe SMILES string evaluation and property calculations.
-    * `engines/simulation/` - Code handling kinetic modeling, flux optimization, and mass-balance calculations.
+    * `cheminformatics_sandbox/` - Dedicated workspace for safely executing and evaluating cheminformatics and SMILES string properties.
 
-
-
-### 3. Validation & Governance Loops (HITL & Audit Trails)
-
-* **What it covers:** Data interpretation, immutable tracking, and human-in-the-loop (HITL) validation.
-* **How it helps:** Utilizes DynamoDB audit trails and a Streamlit frontend to ensure full compliance, safety checks, and seamless human oversight throughout complex biological and chemical workflows.
+### 3. Validation & User Interface Loops
+* **What it covers:** Data interpretation, workflow orchestration, and user interaction.
+* **How it helps:** Provides an interactive interface for users to oversee and run complex biological and chemical workflows.
 * **Relevant Files & Components:**
-    * `frontend/` - Streamlit application hosted on AWS Amplify providing the user interface and HITL control gates.
-    * `backend/governance/` - DynamoDB integration maintaining immutable audit trails and system state history.
-    * `auth/` - Amazon Cognito configuration handling user authentication and role-based access.
-
+    * `frontend/` - User interface components for interacting with the platform.
+    * `infrastructure/` - Infrastructure configurations and deployment files.
 ---
 
 ## Project File Tree
@@ -73,7 +62,7 @@ nexusbio/
 │   └── agents/
 │       ├── __init__.py
 │       ├── literature_miner.py         # Interacts with Bedrock & OpenSearch Serverless[cite: 2]
-│       ├── pathway_synthesizer.py      # Synthesizes pathways via Llama 3 / Claude
+│       ├── pathway_synthesizer.py      # Synthesises pathways via Llama 3 / Claude
 │       └── molecular_design.py         # Interfaces with the Cheminformatics Sandbox[cite: 3]
 │
 ├── cheminformatics_sandbox/            # Cheminformatics Execution Sandbox (ECS Fargate + RDKit)
@@ -100,7 +89,7 @@ nexusbio/
 1. **Bootstrap Environment**:
 ```bash
 cd infrastructure
-cdk bootstrap aws://<YOUR_ACCOUNT_ID>/us-east-1
+cdk bootstrap aws://<YOUR_ACCOUNT_ID>/eu-west-2
 
 ```
 
