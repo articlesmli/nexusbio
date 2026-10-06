@@ -24,15 +24,12 @@ NexusBio bridges exact computational modeling with real-world biological enginee
 * **How it helps:** Employs multi-agent synthesis to explore metabolic routes and identify biological targets.
 * **Relevant Files & Components:**
     * `lambda_orchestrator/` - Serverless code handling multi-agent workflows and model coordination.
-        ---
+        * **`handler.py`**: Serves as the main AWS Lambda entrypoint (`lambda_handler`) that orchestrates the multi-agent loop, coordinates the literature mining and molecular evaluation agents, and records immutable activity logs to the DynamoDB audit trail table.
+        
         `agents/` 
-
         * **`literature_miner.py`**: Queries the Amazon Bedrock Knowledge Base (backed by OpenSearch Serverless) to search through biomedical literature using the `retrieve` API, providing a fallback mock data chunk for local development.
         * **`molecular_design.py`**: Communicates with the ECS Fargate Cheminformatics Sandbox by sending compound SMILES strings via an HTTP POST request for property evaluation, including a fallback mock response if the sandbox container is offline.
         * **`pathway_synthesizer.py`**: Sends retrieved literature context to the Meta Llama 3 70B Instruct model via Amazon Bedrock (`invoke_model`) to analyze pathway mechanisms, target proteins, and suggest structural modifications in JSON format.
-        ---
-
-        * **`handler.py`**: Serves as the main AWS Lambda entrypoint (`lambda_handler`) that orchestrates the multi-agent loop, coordinates the literature mining and molecular evaluation agents, and records immutable activity logs to the DynamoDB audit trail table.
 
 
 ### 2. Pre-Clinical Work (Simulation & Molecular Optimisation)
