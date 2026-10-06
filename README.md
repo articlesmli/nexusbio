@@ -24,6 +24,15 @@ NexusBio bridges exact computational modeling with real-world biological enginee
 * **How it helps:** Employs multi-agent synthesis to explore metabolic routes and identify biological targets.
 * **Relevant Files & Components:**
     * `lambda_orchestrator/` - Serverless code handling multi-agent workflows and model coordination.
+        ---
+        `agents/` 
+
+        * **`literature_miner.py`**: Queries the Amazon Bedrock Knowledge Base (backed by OpenSearch Serverless) to search through biomedical literature using the `retrieve` API, providing a fallback mock data chunk for local development.
+        * **`molecular_design.py`**: Communicates with the ECS Fargate Cheminformatics Sandbox by sending compound SMILES strings via an HTTP POST request for property evaluation, including a fallback mock response if the sandbox container is offline.
+        * **`pathway_synthesizer.py`**: Sends retrieved literature context to the Meta Llama 3 70B Instruct model via Amazon Bedrock (`invoke_model`) to analyze pathway mechanisms, target proteins, and suggest structural modifications in JSON format.
+        ---
+
+        * **`handler.py`**: Serves as the main AWS Lambda entrypoint (`lambda_handler`) that orchestrates the multi-agent loop, coordinates the literature mining and molecular evaluation agents, and records immutable activity logs to the DynamoDB audit trail table.
 
 
 ### 2. Pre-Clinical Work (Simulation & Molecular Optimisation)
@@ -31,6 +40,10 @@ NexusBio bridges exact computational modeling with real-world biological enginee
 * **How it helps:** Leverages isolated environments to execute and evaluate SMILES string properties and molecular characteristics before physical lab testing.
 * **Relevant Files & Components:**
     * `cheminformatics_sandbox/` - Dedicated workspace for safely executing and evaluating cheminformatics and SMILES string properties.
+        * **`Dockerfile`**: Configures a lightweight Python 3.11 slim image, installs essential system packages required for chemical rendering (`build-essential`, `libgl1`, `libxrender1`), installs python dependencies, exposes port 8000, and launches the application using Uvicorn.
+        * **`main.py`**: Implements a FastAPI application that provides two core endpoints: `/evaluate-smiles` (which takes molecular SMILES input, validates it, computes properties, and returns structured metadata) and `/health` for checking service status.
+
+        * **`utils/descriptors.py`**: Contains helper functions utilizing the RDKit library to parse SMILES strings, generate canonical forms, compute quantitative estimate of drug-likeness (QED), molecular weight, logP, and check Lipinski's Rule of 5 violations.
 
 
 ### 3. Validation & User Interface Loops
@@ -40,36 +53,26 @@ NexusBio bridges exact computational modeling with real-world biological enginee
     * `frontend/` - User interface components for interacting with the platform.
        * `app.py` builds an interactive, multi-tab web application called NexusBio - HITL Research Dashboard using Streamlit. It simulates a control panel designed for biomedical researchers, safety officers, and auditors to monitor automated multi-agent workflows.
        * `Dockerfile` packages this Python 3.11 Streamlit application into a lightweight container, exposing port 8501 so it can be deployed on cloud services like AWS Amplify or ECS.
+
     * `infrastructure/` - Infrastructure configurations and deployment files.
-    
         * **`package.json`**: Defines the project metadata, build scripts (`build`, `watch`, `test`, `cdk`), and project dependencies like `aws-cdk-lib` and `constructs`.
-
-
         * **`package-lock.json`**: Automatically generated file that locks exact dependency versions to ensure consistent builds across different environments.
-
-
         * **`tsconfig.json`**: TypeScript compiler configuration file that specifies target ECMAScript versions (`ES2022`), module systems (`commonjs`), and strict type-checking options.
-
-
         * **`cdk.json`**: Configuration file for the AWS CDK toolkit that specifies how the app is executed (e.g., using `ts-node` to run `bin/nexusbio.ts`) and watch directories.
-
-
         * **`cdk.context.json`**: Caches environment-specific metadata queried from AWS (such as available Availability Zones for your region) to speed up CDK syntheses.
 
         ---
 
-        ### Entry Point (`bin/`)
+       `bin/` - entry point
 
         * **`nexusbio.ts`** (and compiled **`nexusbio.js` / `nexusbio.d.ts**`): The main entry point for the CDK application. It instantiates the CDK `App`, defines the AWS environment region/account, creates instances of the Networking, Storage, and Compute stacks, and establishes explicit inter-stack dependencies.
 
         ---
 
-        ### Infrastructure Stacks (`lib/`)
+       `lib/` - infrastructure stacks
 
         * **`networking_stack.ts`** (and compiled **`networking_stack.js` / `networking_stack.d.ts**`): Defines the custom VPC (`NexusBioVPC`) with public subnets and private subnets with egress via a NAT gateway to safely isolate internal workloads.
-
         * **`storage_stack.ts`** (and compiled **`storage_stack.js` / `storage_stack.d.ts**`): Manages persistent data resources, including an S3 Data Lake bucket, a DynamoDB audit trail table, and an OpenSearch Serverless vector store collection (`nexusbio-literature-vector-store`) complete with encryption and network security policies.
-
         * **`compute_stack.ts`** (and compiled `compute_stack.js` / `compute_stack.d.ts`): Deploys compute workloads inside the VPC, including an ECS Fargate cluster running a cheminformatics sandbox behind an internal load balancer, and a Python Lambda orchestrator with least-privilege permissions to access the S3 bucket and DynamoDB table.
             
 ---
