@@ -42,7 +42,7 @@ jobs:
 
       - name: Run Pytest Suite
         run: |
-          pytest  
+          PYTHONPATH=. pytest cheminformatics_sandbox/tests/
 
   # ==========================================
   # JOB 2: Test Infrastructure (CDK & TypeScript)
