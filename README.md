@@ -38,6 +38,8 @@ NexusBio bridges exact computational modeling with real-world biological enginee
 * **How it helps:** Provides an interactive interface for users to oversee and run complex biological and chemical workflows.
 * **Relevant Files & Components:**
     * `frontend/` - User interface components for interacting with the platform.
+       * `app.py` builds an interactive, multi-tab web application called NexusBio - HITL Research Dashboard using Streamlit. It simulates a control panel designed for biomedical researchers, safety officers, and auditors to monitor automated multi-agent workflows.
+       * `Dockerfile` packages this Python 3.11 Streamlit application into a lightweight container, exposing port 8501 so it can be deployed on cloud services like AWS Amplify or ECS.
     * `infrastructure/` - Infrastructure configurations and deployment files.
     
 ---
