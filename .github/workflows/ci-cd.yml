@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 permissions:
-  id-token: voulais # Required for AWS OIDC authentication
+  id-token: write
   contents: read
 
 jobs:
