@@ -9,7 +9,6 @@ import * as iam from 'aws-cdk-lib/aws-iam';
 import * as elbv2 from 'aws-cdk-lib/aws-elasticloadbalancingv2';
 import { Construct } from 'constructs';
 
-
 interface ComputeStackProps extends cdk.StackProps {
   vpc: ec2.IVpc;
   dataLakeBucket: s3.IBucket;
@@ -23,7 +22,8 @@ export class ComputeStack extends cdk.Stack {
     // Cheminformatics Sandbox: ECS Fargate container behind an Internal Network Load Balancer
     const cluster = new ecs.Cluster(this, 'SandboxCluster', { vpc: props.vpc });
 
-    const fargateService = new ecs_patterns.NetworkLoadBalancedFargateService(this, 'SandboxService', {
+    // Renamed ID from 'SandboxService' to 'SandboxServiceV2' to force a fresh target group creation
+    const fargateService = new ecs_patterns.NetworkLoadBalancedFargateService(this, 'SandboxServiceV2', {
       cluster,
       memoryLimitMiB: 2048,
       cpu: 1024,
