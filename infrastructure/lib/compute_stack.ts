@@ -1,64 +1,40 @@
 import * as cdk from 'aws-cdk-lib';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
-import * as s3 from 'aws-cdk-lib/aws-s3';
-import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as ecs_patterns from 'aws-cdk-lib/aws-ecs-patterns';
-import * as iam from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 
 interface ComputeStackProps extends cdk.StackProps {
   vpc: ec2.IVpc;
-  dataLakeBucket: s3.IBucket;
-  auditTable: dynamodb.ITable;
+  auditTable: cdk.aws_dynamodb.ITable;
+  dataLakeBucket: cdk.aws_s3.IBucket;
 }
 
 export class ComputeStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: ComputeStackProps) {
     super(scope, id, props);
 
+    // ECS Fargate container behind an Application Load Balancer (ALB)
     const cluster = new ecs.Cluster(this, 'SandboxCluster', { vpc: props.vpc });
 
-    // Using ApplicationLoadBalancedFargateService (ALB) instead of Network Load Balancer
-    const fargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, 'SandboxServiceV3', {
+    const fargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, 'SandboxService', {
       cluster,
       memoryLimitMiB: 2048,
       cpu: 1024,
       taskImageOptions: {
-        image: ecs.ContainerImage.fromAsset('../../cheminformatics_sandbox'),
+        image: ecs.ContainerImage.fromAsset('../cheminformatics_sandbox'),
         containerPort: 8000,
-        environment: {
-          PYTHONUNBUFFERED: '1',
-        },
       },
-      publicLoadBalancer: false,
-      listenerPort: 8000,
-      circuitBreaker: { rollback: true },
-      minHealthyPercent: 0,
+      publicLoadBalancer: true, // Public ALB to route incoming traffic
     });
 
-    // Configured for your /health endpoint
+    // Configure health check path for the Application Load Balancer target group
     fargateService.targetGroup.configureHealthCheck({
       path: '/health',
-      port: '8000',
-      healthyHttpCodes: '200-299',
-      interval: cdk.Duration.seconds(30),
-      timeout: cdk.Duration.seconds(5),
     });
 
-    fargateService.taskDefinition.addToExecutionRolePolicy(
-      new iam.PolicyStatement({
-        actions: [
-          "ecr:GetAuthorizationToken",
-          "ecr:BatchCheckLayerAvailability",
-          "ecr:GetDownloadUrlForLayer",
-          "ecr:BatchGetImage"
-        ],
-        resources: ["arn:aws:ecr:eu-west-2:089340569022:repository/nexusbio-sandbox-base"]
-      })
-    );
-
+    // Lambda Orchestrator Function
     const orchestratorFunction = new lambda.Function(this, 'LambdaOrchestrator', {
       runtime: lambda.Runtime.PYTHON_3_11,
       handler: 'handler.lambda_handler',
@@ -73,6 +49,7 @@ export class ComputeStack extends cdk.Stack {
       },
     });
 
+    // Grant least-privilege resource access
     props.dataLakeBucket.grantReadWrite(orchestratorFunction);
     props.auditTable.grantWriteData(orchestratorFunction);
   }
