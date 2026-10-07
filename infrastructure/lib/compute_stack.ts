@@ -20,6 +20,7 @@ export class ComputeStack extends cdk.Stack {
 
     const cluster = new ecs.Cluster(this, 'SandboxCluster', { vpc: props.vpc });
 
+    // MUST BE ApplicationLoadBalancedFargateService (NOT NetworkLoadBalancedFargateService)
     const fargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, 'SandboxServiceV3', {
       cluster,
       memoryLimitMiB: 2048,
@@ -37,11 +38,10 @@ export class ComputeStack extends cdk.Stack {
       minHealthyPercent: 0,
     });
 
-    // CRITICAL FIX: Explicitly configure the target group health check 
-    // to look at port 8000 and use a valid HTTP path (e.g., '/' or your health endpoint)
+    // Configured for your /health endpoint
     fargateService.targetGroup.configureHealthCheck({
-      path: '/', // Change to '/health' if your python app has a specific health route
-      port: '8000', 
+      path: '/health',
+      port: '8000',
       healthyHttpCodes: '200-299',
       interval: cdk.Duration.seconds(30),
       timeout: cdk.Duration.seconds(5),
