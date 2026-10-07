@@ -6,7 +6,6 @@ import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as ecs_patterns from 'aws-cdk-lib/aws-ecs-patterns';
 import * as iam from 'aws-cdk-lib/aws-iam';
-import * as elbv2 from 'aws-cdk-lib/aws-elasticloadbalancingv2';
 import { Construct } from 'constructs';
 
 interface ComputeStackProps extends cdk.StackProps {
@@ -19,27 +18,26 @@ export class ComputeStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: ComputeStackProps) {
     super(scope, id, props);
 
-    // Cheminformatics Sandbox: ECS Fargate container behind an Internal Network Load Balancer
+    // Cheminformatics Sandbox: ECS Fargate container behind an Internal Application Load Balancer
     const cluster = new ecs.Cluster(this, 'SandboxCluster', { vpc: props.vpc });
 
-    // Renamed ID from 'SandboxService' to 'SandboxServiceV2' to force a fresh target group creation
-    const fargateService = new ecs_patterns.NetworkLoadBalancedFargateService(this, 'SandboxServiceV2', {
+    // Using ApplicationLoadBalancedFargateService to natively support HTTP health check paths
+    const fargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, 'SandboxServiceV3', {
       cluster,
       memoryLimitMiB: 2048,
       cpu: 1024,
       taskImageOptions: {
-        image: ecs.ContainerImage.fromAsset('../cheminformatics_sandbox'),
+        image: ecs.ContainerImage.fromAsset('../../cheminformatics_sandbox'),
         containerPort: 8000,
+        environment: {
+          PYTHONUNBUFFERED: '1',
+        },
       },
       publicLoadBalancer: false, // Internal-only access restricted within VPC
-      listenerPort: 8000,        // Exposes port 8000 on the Network Load Balancer
+      listenerPort: 8000,
+      healthCheckPath: '/',      // Natively supported HTTP health check path
       circuitBreaker: { rollback: true },
       minHealthyPercent: 0,
-    });
-
-    fargateService.targetGroup.configureHealthCheck({
-      protocol: elbv2.Protocol.TCP, 
-      interval: cdk.Duration.seconds(30),
     });
 
     // Grant the ECS Task Execution Role explicit rights to pull your custom ECR base layer image
