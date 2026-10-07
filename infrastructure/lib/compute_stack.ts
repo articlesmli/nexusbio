@@ -20,7 +20,7 @@ export class ComputeStack extends cdk.Stack {
 
     const cluster = new ecs.Cluster(this, 'SandboxCluster', { vpc: props.vpc });
 
-    // MUST BE ApplicationLoadBalancedFargateService (NOT NetworkLoadBalancedFargateService)
+    // Using ApplicationLoadBalancedFargateService (ALB) instead of Network Load Balancer
     const fargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, 'SandboxServiceV3', {
       cluster,
       memoryLimitMiB: 2048,
