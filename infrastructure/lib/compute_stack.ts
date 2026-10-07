@@ -5,6 +5,7 @@ import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as ecs_patterns from 'aws-cdk-lib/aws-ecs-patterns';
+import * as iam from 'aws-cdk-lib/aws-iam'; // 👈 Added IAM import for ECR permissions
 import { Construct } from 'constructs';
 
 interface ComputeStackProps extends cdk.StackProps {
@@ -28,8 +29,30 @@ export class ComputeStack extends cdk.Stack {
         image: ecs.ContainerImage.fromAsset('../cheminformatics_sandbox'),
         containerPort: 8000,
       },
-      publicLoadBalancer: false, // Internal-only access restricted within VPC
+      publicLoadBalancer: false,    // Internal-only access restricted within VPC
+      listenerPort: 8000,           // Exposes port 8000 externally on the NLB
+      circuitBreaker: { rollback: true }, // 👈 Added: Rollback quickly if tasks crash on startup
+      minHealthyPercent: 0,         // 👈 Added: Prevents deployment bottlenecks during startup
     });
+
+    // Forces the Network Load Balancer health checks to target your verified /health endpoint on port 8000
+    fargateService.targetGroup.configureHealthCheck({
+      port: '8000',
+      path: '/health',              // 👈 Updated to use your functional FastAPI health route
+    });
+
+    // Grant the ECS Task Execution Role explicit rights to pull your custom ECR base layer image
+    fargateService.taskDefinition.addToExecutionRolePolicy(
+      new iam.PolicyStatement({
+        actions: [
+          "ecr:GetAuthorizationToken",
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:BatchGetImage"
+        ],
+        resources: ["arn:aws:ecr:eu-west-2:089340569022:repository/nexusbio-sandbox-base"]
+      })
+    );
 
     // [Point 1] Lambda Orchestrator Function (ZIP deployment inside VPC)
     const orchestratorFunction = new lambda.Function(this, 'LambdaOrchestrator', {

@@ -44,7 +44,7 @@
     "LoadBalancerArn": {
      "Ref": "SandboxServiceLB37D1042A"
     },
-    "Port": 80,
+    "Port": 8000,
     "Protocol": "TCP"
    },
    "Metadata": {
@@ -54,6 +54,8 @@
   "SandboxServiceLBPublicListenerECSGroupE3B73D2C": {
    "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
    "Properties": {
+    "HealthCheckPath": "/health",
+    "HealthCheckPort": "8000",
     "Port": 8000,
     "Protocol": "TCP",
     "TargetType": "ip",
@@ -92,7 +94,7 @@
      {
       "Essential": true,
       "Image": {
-       "Fn::Sub": "089340569022.dkr.ecr.eu-west-2.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-089340569022-eu-west-2:14f64c57ceb8723ca29fde732f47706af584e207092473258304a3337e19d2b3"
+       "Fn::Sub": "089340569022.dkr.ecr.eu-west-2.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-089340569022-eu-west-2:d19e05a727e2b50f976b846a9db182eb91fcec5f90e0146dde171525d462a658"
       },
       "LogConfiguration": {
        "LogDriver": "awslogs",
@@ -207,6 +209,16 @@
          "Arn"
         ]
        }
+      },
+      {
+       "Action": [
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:ecr:eu-west-2:089340569022:repository/nexusbio-sandbox-base"
       }
      ],
      "Version": "2012-10-17"
@@ -234,8 +246,15 @@
       "Enable": false,
       "Rollback": false
      },
+     "DeploymentCircuitBreaker": {
+      "Enable": true,
+      "Rollback": true
+     },
      "MaximumPercent": 200,
-     "MinimumHealthyPercent": 50
+     "MinimumHealthyPercent": 0
+    },
+    "DeploymentController": {
+     "Type": "ECS"
     },
     "EnableECSManagedTags": false,
     "HealthCheckGracePeriodSeconds": 60,

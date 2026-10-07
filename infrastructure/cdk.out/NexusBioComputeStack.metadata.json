@@ -78,7 +78,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Cluster2 in aws-cdk-lib...",
-        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:21:21)",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:22:21)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -93,81 +93,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new NetworkLoadBalancedFargateService2 in aws-cdk-lib...",
-        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:24:28)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
         "...node internals, ts-node, ts-node..."
-      ]
-    }
-  ],
-  "/NexusBioComputeStack/SandboxService/Service": [
-    {
-      "type": "aws:cdk:warning",
-      "data": "Enable the 'circuitBreaker' property to trigger a quicker deployment failure if tasks are failing to start up (without this setting deployments may take up to 3 hours to fail). [ack: @aws-cdk/aws-ecs:shouldUseCircuitBreaker]",
-      "trace": [
-        "Annotations.addMessage (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/annotations.js:1:3506)",
-        "Annotations.addWarningV2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2194)",
-        "new BaseService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ecs/lib/base/base-service.js:1:14814)",
-        "new BaseService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/no-box-stack-traces.js:1:349)",
-        "new FargateService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ecs/lib/fargate/fargate-service.js:1:8083)",
-        "new FargateService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:861)",
-        "new NetworkLoadBalancedFargateService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ecs-patterns/lib/fargate/network-load-balanced-fargate-service.js:1:6451)",
-        "new NetworkLoadBalancedFargateService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:861)",
-        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)",
-        "Object.<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
-        "Module._compile (node:internal/modules/cjs/loader:1929:14)",
-        "Module.m._compile (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/index.ts:1618:23)",
-        "node:internal/modules/cjs/loader:2060:10",
-        "Object.require.extensions.<computed> [as .ts] (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/index.ts:1621:12)",
-        "Module.load (node:internal/modules/cjs/loader:1651:32)",
-        "Module._load (node:internal/modules/cjs/loader:1443:12)",
-        "wrapModuleLoad (node:internal/modules/cjs/loader:261:19)",
-        "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
-        "phase4 (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:649:14)",
-        "bootstrap (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:95:10)",
-        "main (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:55:10)",
-        "Object.<anonymous> (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:800:3)",
-        "Module._compile (node:internal/modules/cjs/loader:1929:14)",
-        "Object.<anonymous> (node:internal/modules/cjs/loader:2060:10)",
-        "Module.load (node:internal/modules/cjs/loader:1651:32)",
-        "Module._load (node:internal/modules/cjs/loader:1443:12)",
-        "wrapModuleLoad (node:internal/modules/cjs/loader:261:19)",
-        "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
-        "node:internal/main/run_main_module:33:47"
-      ]
-    },
-    {
-      "type": "aws:cdk:warning",
-      "data": "minHealthyPercent has not been configured so the default value of 50% is used. The number of running tasks will decrease below the desired count during deployments etc. See https://github.com/aws/aws-cdk/issues/31705 [ack: @aws-cdk/aws-ecs:minHealthyPercent]",
-      "trace": [
-        "Annotations.addMessage (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/annotations.js:1:3506)",
-        "Annotations.addWarningV2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2194)",
-        "new BaseService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ecs/lib/base/base-service.js:1:16436)",
-        "new BaseService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/no-box-stack-traces.js:1:349)",
-        "new FargateService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ecs/lib/fargate/fargate-service.js:1:8083)",
-        "new FargateService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:861)",
-        "new NetworkLoadBalancedFargateService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/aws-ecs-patterns/lib/fargate/network-load-balanced-fargate-service.js:1:6451)",
-        "new NetworkLoadBalancedFargateService2 (/home/ivanovaml/nexusbio/infrastructure/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:861)",
-        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)",
-        "Object.<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
-        "Module._compile (node:internal/modules/cjs/loader:1929:14)",
-        "Module.m._compile (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/index.ts:1618:23)",
-        "node:internal/modules/cjs/loader:2060:10",
-        "Object.require.extensions.<computed> [as .ts] (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/index.ts:1621:12)",
-        "Module.load (node:internal/modules/cjs/loader:1651:32)",
-        "Module._load (node:internal/modules/cjs/loader:1443:12)",
-        "wrapModuleLoad (node:internal/modules/cjs/loader:261:19)",
-        "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
-        "phase4 (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:649:14)",
-        "bootstrap (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:95:10)",
-        "main (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:55:10)",
-        "Object.<anonymous> (/home/ivanovaml/.npm/_npx/1bf7c3c15bf47d04/node_modules/ts-node/src/bin.ts:800:3)",
-        "Module._compile (node:internal/modules/cjs/loader:1929:14)",
-        "Object.<anonymous> (node:internal/modules/cjs/loader:2060:10)",
-        "Module.load (node:internal/modules/cjs/loader:1651:32)",
-        "Module._load (node:internal/modules/cjs/loader:1443:12)",
-        "wrapModuleLoad (node:internal/modules/cjs/loader:261:19)",
-        "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
-        "node:internal/main/run_main_module:33:47"
       ]
     }
   ],
@@ -180,7 +108,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Function2 in aws-cdk-lib...",
-        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:35:34)",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:58:34)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -209,7 +137,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new NetworkLoadBalancedFargateService2 in aws-cdk-lib...",
-        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:24:28)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
         "...node internals, ts-node..."
       ]
@@ -224,7 +152,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new NetworkLoadBalancedFargateService2 in aws-cdk-lib...",
-        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:24:28)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
         "...node internals, ts-node..."
       ]
@@ -239,7 +167,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new NetworkLoadBalancedFargateService2 in aws-cdk-lib...",
-        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:24:28)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
         "...node internals, ts-node..."
       ]
@@ -254,7 +182,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Function2 in aws-cdk-lib...",
-        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:35:34)",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:58:34)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
         "...node internals, ts-node, ts-node..."
       ]
@@ -269,7 +197,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Function2 in aws-cdk-lib...",
-        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:35:34)",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:58:34)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)",
         "...node internals, ts-node..."
       ]
@@ -297,7 +225,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new NetworkLoadBalancedFargateService2 in aws-cdk-lib...",
-        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:24:28)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)"
       ]
     }
@@ -324,7 +252,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new NetworkLoadBalancedFargateService2 in aws-cdk-lib...",
-        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)",
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:24:28)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:22:22)"
       ]
     }
@@ -351,7 +279,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new NetworkLoadBalancedFargateService2 in aws-cdk-lib...",
-        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:23:28)"
+        "new ComputeStack (/home/ivanovaml/nexusbio/infrastructure/lib/compute_stack.ts:24:28)"
       ]
     }
   ],
