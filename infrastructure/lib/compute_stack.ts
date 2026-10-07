@@ -18,7 +18,6 @@ export class ComputeStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: ComputeStackProps) {
     super(scope, id, props);
 
-    // Cheminformatics Sandbox: ECS Fargate container behind an Internal Application Load Balancer
     const cluster = new ecs.Cluster(this, 'SandboxCluster', { vpc: props.vpc });
 
     const fargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, 'SandboxServiceV3', {
@@ -32,13 +31,12 @@ export class ComputeStack extends cdk.Stack {
           PYTHONUNBUFFERED: '1',
         },
       },
-      publicLoadBalancer: false, // Internal-only access restricted within VPC
+      publicLoadBalancer: false,
       listenerPort: 8000,
       circuitBreaker: { rollback: true },
       minHealthyPercent: 0,
     });
 
-    // Grant the ECS Task Execution Role explicit rights to pull your custom ECR base layer image
     fargateService.taskDefinition.addToExecutionRolePolicy(
       new iam.PolicyStatement({
         actions: [
@@ -51,7 +49,6 @@ export class ComputeStack extends cdk.Stack {
       })
     );
 
-    // Lambda Orchestrator Function (ZIP deployment inside VPC)
     const orchestratorFunction = new lambda.Function(this, 'LambdaOrchestrator', {
       runtime: lambda.Runtime.PYTHON_3_11,
       handler: 'handler.lambda_handler',
@@ -66,7 +63,6 @@ export class ComputeStack extends cdk.Stack {
       },
     });
 
-    // Grant least-privilege resource access
     props.dataLakeBucket.grantReadWrite(orchestratorFunction);
     props.auditTable.grantWriteData(orchestratorFunction);
   }
