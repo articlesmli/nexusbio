@@ -37,6 +37,12 @@ export class ComputeStack extends cdk.Stack {
       minHealthyPercent: 0,
     });
 
+    // Optional: If you want to customize the health check path (defaults to '/' if omitted)
+    fargateService.targetGroup.configureHealthCheck({
+      path: '/', // Change this to your specific health check route if needed (e.g., '/health')
+      healthyHttpCodes: '200-299',
+    });
+
     fargateService.taskDefinition.addToExecutionRolePolicy(
       new iam.PolicyStatement({
         actions: [
