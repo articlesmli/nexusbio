@@ -43,4 +43,4 @@ def evaluate_smiles(request: EvaluationRequest):
 
 @app.get("/health")
 def health_check():
-    return {"status": "healthy", "service": "cheminformatics_sandbox"}
+    return {"status": "healthy", "service": "cheminformatics_sandbox"} 
