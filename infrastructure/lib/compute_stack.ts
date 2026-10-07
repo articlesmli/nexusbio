@@ -6,7 +6,9 @@ import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as ecs_patterns from 'aws-cdk-lib/aws-ecs-patterns';
 import * as iam from 'aws-cdk-lib/aws-iam';
+import * as elbv2 from 'aws-cdk-lib/aws-elasticloadbalancingv2';
 import { Construct } from 'constructs';
+
 
 interface ComputeStackProps extends cdk.StackProps {
   vpc: ec2.IVpc;
@@ -18,10 +20,10 @@ export class ComputeStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: ComputeStackProps) {
     super(scope, id, props);
 
-    // Cheminformatics Sandbox: ECS Fargate container behind an Internal Application Load Balancer
+    // Cheminformatics Sandbox: ECS Fargate container behind an Internal Network Load Balancer
     const cluster = new ecs.Cluster(this, 'SandboxCluster', { vpc: props.vpc });
 
-    const fargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, 'SandboxService', {
+    const fargateService = new ecs_patterns.NetworkLoadBalancedFargateService(this, 'SandboxService', {
       cluster,
       memoryLimitMiB: 2048,
       cpu: 1024,
@@ -30,16 +32,14 @@ export class ComputeStack extends cdk.Stack {
         containerPort: 8000,
       },
       publicLoadBalancer: false, // Internal-only access restricted within VPC
-      listenerPort: 8000,        // Exposes port 8000 on the Application Load Balancer
+      listenerPort: 8000,        // Exposes port 8000 on the Network Load Balancer
       circuitBreaker: { rollback: true },
       minHealthyPercent: 0,
     });
 
-    // Configure a proper HTTP health check path for the FastAPI application (supported by ALBs)
     fargateService.targetGroup.configureHealthCheck({
-      path: '/health',
+      protocol: elbv2.Protocol.TCP, 
       interval: cdk.Duration.seconds(30),
-      healthyHttpCodes: '200',
     });
 
     // Grant the ECS Task Execution Role explicit rights to pull your custom ECR base layer image
