@@ -1,17 +1,10 @@
 {
-  "app": "npx ts-node --prefer-ts-exts bin/nexusbio.ts",
+  "app": "node bin/nexusbio.js",
   "watch": {
-    "include": [
-      "**/*.ts"
-    ],
-    "exclude": [
-      "README.md",
-      "cdk*.json",
-      "node_modules",
-      "*.d.ts",
-      "*.js",
-      "build",
-      "dist"
-    ]
+    "include": ["**"],
+    "exclude": ["README.md", "cdk*.json", "node_modules", "*.d.ts", "*.js", "tsconfig.json"]
+  },
+  "context": {
+    "@aws-cdk/core:stackRelativeExports": true
   }
 }

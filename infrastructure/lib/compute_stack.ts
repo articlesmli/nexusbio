@@ -5,7 +5,7 @@ import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as ecs_patterns from 'aws-cdk-lib/aws-ecs-patterns';
-import * as iam from 'aws-cdk-lib/aws-iam'; // 👈 Added IAM import for ECR permissions
+import * as iam from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 
 interface ComputeStackProps extends cdk.StackProps {
@@ -18,10 +18,10 @@ export class ComputeStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: ComputeStackProps) {
     super(scope, id, props);
 
-    // [Point 3] Cheminformatics Sandbox: ECS Fargate container behind an Internal ALB
+    // Cheminformatics Sandbox: ECS Fargate container behind an Internal Application Load Balancer
     const cluster = new ecs.Cluster(this, 'SandboxCluster', { vpc: props.vpc });
 
-    const fargateService = new ecs_patterns.NetworkLoadBalancedFargateService(this, 'SandboxService', {
+    const fargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, 'SandboxService', {
       cluster,
       memoryLimitMiB: 2048,
       cpu: 1024,
@@ -29,16 +29,17 @@ export class ComputeStack extends cdk.Stack {
         image: ecs.ContainerImage.fromAsset('../cheminformatics_sandbox'),
         containerPort: 8000,
       },
-      publicLoadBalancer: false,    // Internal-only access restricted within VPC
-      listenerPort: 8000,           // Exposes port 8000 externally on the NLB
-      circuitBreaker: { rollback: true }, // 👈 Added: Rollback quickly if tasks crash on startup
-      minHealthyPercent: 0,         // 👈 Added: Prevents deployment bottlenecks during startup
+      publicLoadBalancer: false, // Internal-only access restricted within VPC
+      listenerPort: 8000,        // Exposes port 8000 on the Application Load Balancer
+      circuitBreaker: { rollback: true },
+      minHealthyPercent: 0,
     });
 
-    // Forces the Network Load Balancer health checks to target your verified /health endpoint on port 8000
+    // Configure a proper HTTP health check path for the FastAPI application (supported by ALBs)
     fargateService.targetGroup.configureHealthCheck({
-      port: '8000',
-      path: '/health',              // 👈 Updated to use your functional FastAPI health route
+      path: '/health',
+      interval: cdk.Duration.seconds(30),
+      healthyHttpCodes: '200',
     });
 
     // Grant the ECS Task Execution Role explicit rights to pull your custom ECR base layer image
@@ -54,7 +55,7 @@ export class ComputeStack extends cdk.Stack {
       })
     );
 
-    // [Point 1] Lambda Orchestrator Function (ZIP deployment inside VPC)
+    // Lambda Orchestrator Function (ZIP deployment inside VPC)
     const orchestratorFunction = new lambda.Function(this, 'LambdaOrchestrator', {
       runtime: lambda.Runtime.PYTHON_3_11,
       handler: 'handler.lambda_handler',
