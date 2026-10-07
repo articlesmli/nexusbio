@@ -21,7 +21,6 @@ export class ComputeStack extends cdk.Stack {
     // Cheminformatics Sandbox: ECS Fargate container behind an Internal Application Load Balancer
     const cluster = new ecs.Cluster(this, 'SandboxCluster', { vpc: props.vpc });
 
-    // Using ApplicationLoadBalancedFargateService to natively support HTTP health check paths
     const fargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, 'SandboxServiceV3', {
       cluster,
       memoryLimitMiB: 2048,
@@ -35,7 +34,6 @@ export class ComputeStack extends cdk.Stack {
       },
       publicLoadBalancer: false, // Internal-only access restricted within VPC
       listenerPort: 8000,
-      healthCheckPath: '/',      // Natively supported HTTP health check path
       circuitBreaker: { rollback: true },
       minHealthyPercent: 0,
     });
