@@ -401,6 +401,30 @@
   }
  },
  "Outputs": {
+  "ExportsOutputRefNexusBioVPCPublicSubnetSubnet1SubnetC4C77E4C0665FC44": {
+   "Value": {
+    "Ref": "NexusBioVPCPublicSubnetSubnet1SubnetC4C77E4C"
+   },
+   "Export": {
+    "Name": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCPublicSubnetSubnet1SubnetC4C77E4C0665FC44"
+   }
+  },
+  "ExportsOutputRefNexusBioVPCPublicSubnetSubnet2SubnetE8BF887BF2901C85": {
+   "Value": {
+    "Ref": "NexusBioVPCPublicSubnetSubnet2SubnetE8BF887B"
+   },
+   "Export": {
+    "Name": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCPublicSubnetSubnet2SubnetE8BF887BF2901C85"
+   }
+  },
+  "ExportsOutputRefNexusBioVPCA3321769C971BC5B": {
+   "Value": {
+    "Ref": "NexusBioVPCA3321769"
+   },
+   "Export": {
+    "Name": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCA3321769C971BC5B"
+   }
+  },
   "ExportsOutputRefNexusBioVPCPrivateSubnetSubnet1SubnetD697271F0454F5CF": {
    "Value": {
     "Ref": "NexusBioVPCPrivateSubnetSubnet1SubnetD697271F"
@@ -415,14 +439,6 @@
    },
    "Export": {
     "Name": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCPrivateSubnetSubnet2Subnet29FC0BF9AED8ED84"
-   }
-  },
-  "ExportsOutputRefNexusBioVPCA3321769C971BC5B": {
-   "Value": {
-    "Ref": "NexusBioVPCA3321769"
-   },
-   "Export": {
-    "Name": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCA3321769C971BC5B"
    }
   }
  },

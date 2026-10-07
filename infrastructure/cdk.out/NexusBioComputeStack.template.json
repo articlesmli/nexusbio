@@ -6,7 +6,7 @@
     "aws:cdk:path": "NexusBioComputeStack/SandboxCluster/Resource"
    }
   },
-  "SandboxServiceLB37D1042A": {
+  "SandboxServiceV4LB0C324DD5": {
    "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
    "Properties": {
     "LoadBalancerAttributes": [
@@ -15,59 +15,117 @@
       "Value": "false"
      }
     ],
-    "Scheme": "internal",
-    "Subnets": [
+    "Scheme": "internet-facing",
+    "SecurityGroups": [
      {
-      "Fn::ImportValue": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCPrivateSubnetSubnet1SubnetD697271F0454F5CF"
-     },
-     {
-      "Fn::ImportValue": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCPrivateSubnetSubnet2Subnet29FC0BF9AED8ED84"
+      "Fn::GetAtt": [
+       "SandboxServiceV4LBSecurityGroup89BDA21B",
+       "GroupId"
+      ]
      }
     ],
-    "Type": "network"
+    "Subnets": [
+     {
+      "Fn::ImportValue": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCPublicSubnetSubnet1SubnetC4C77E4C0665FC44"
+     },
+     {
+      "Fn::ImportValue": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCPublicSubnetSubnet2SubnetE8BF887BF2901C85"
+     }
+    ],
+    "Type": "application"
    },
    "Metadata": {
-    "aws:cdk:path": "NexusBioComputeStack/SandboxService/LB/Resource"
+    "aws:cdk:path": "NexusBioComputeStack/SandboxServiceV4/LB/Resource"
    }
   },
-  "SandboxServiceLBPublicListenerCB69CD23": {
+  "SandboxServiceV4LBSecurityGroup89BDA21B": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Automatically created Security Group for ELB NexusBioComputeStackSandboxServiceV4LBCCA6A4AC",
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow from anyone on port 80",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     }
+    ],
+    "VpcId": {
+     "Fn::ImportValue": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCA3321769C971BC5B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/SandboxServiceV4/LB/SecurityGroup/Resource"
+   }
+  },
+  "SandboxServiceV4LBSecurityGrouptoNexusBioComputeStackSandboxServiceV4ServiceSecurityGroup7C9E7C0980003DF66ECA": {
+   "Type": "AWS::EC2::SecurityGroupEgress",
+   "Properties": {
+    "Description": "Load balancer to target",
+    "DestinationSecurityGroupId": {
+     "Fn::GetAtt": [
+      "SandboxServiceV4ServiceSecurityGroup1708E799",
+      "GroupId"
+     ]
+    },
+    "FromPort": 8000,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "SandboxServiceV4LBSecurityGroup89BDA21B",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "ToPort": 8000
+   },
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/SandboxServiceV4/LB/SecurityGroup/to NexusBioComputeStackSandboxServiceV4ServiceSecurityGroup7C9E7C09:8000"
+   }
+  },
+  "SandboxServiceV4LBPublicListener78DE668A": {
    "Type": "AWS::ElasticLoadBalancingV2::Listener",
    "Properties": {
     "DefaultActions": [
      {
       "TargetGroupArn": {
-       "Ref": "SandboxServiceLBPublicListenerECSGroupE3B73D2C"
+       "Ref": "SandboxServiceV4LBPublicListenerECSGroup79130D64"
       },
       "Type": "forward"
      }
     ],
     "LoadBalancerArn": {
-     "Ref": "SandboxServiceLB37D1042A"
+     "Ref": "SandboxServiceV4LB0C324DD5"
     },
-    "Port": 8000,
-    "Protocol": "TCP"
+    "Port": 80,
+    "Protocol": "HTTP"
    },
    "Metadata": {
-    "aws:cdk:path": "NexusBioComputeStack/SandboxService/LB/PublicListener/Resource"
+    "aws:cdk:path": "NexusBioComputeStack/SandboxServiceV4/LB/PublicListener/Resource"
    }
   },
-  "SandboxServiceLBPublicListenerECSGroupE3B73D2C": {
+  "SandboxServiceV4LBPublicListenerECSGroup79130D64": {
    "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
    "Properties": {
     "HealthCheckPath": "/health",
-    "HealthCheckPort": "8000",
-    "Port": 8000,
-    "Protocol": "TCP",
+    "Port": 80,
+    "Protocol": "HTTP",
+    "TargetGroupAttributes": [
+     {
+      "Key": "stickiness.enabled",
+      "Value": "false"
+     }
+    ],
     "TargetType": "ip",
     "VpcId": {
      "Fn::ImportValue": "NexusBioNetworkingStack:ExportsOutputRefNexusBioVPCA3321769C971BC5B"
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NexusBioComputeStack/SandboxService/LB/PublicListener/ECSGroup/Resource"
+    "aws:cdk:path": "NexusBioComputeStack/SandboxServiceV4/LB/PublicListener/ECSGroup/Resource"
    }
   },
-  "SandboxServiceTaskDefTaskRoleEC9E4CA2": {
+  "SandboxServiceV4TaskDefTaskRoleB4FBB42B": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -84,25 +142,25 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NexusBioComputeStack/SandboxService/TaskDef/TaskRole/Resource"
+    "aws:cdk:path": "NexusBioComputeStack/SandboxServiceV4/TaskDef/TaskRole/Resource"
    }
   },
-  "SandboxServiceTaskDefDA830ECB": {
+  "SandboxServiceV4TaskDef4E1B4D88": {
    "Type": "AWS::ECS::TaskDefinition",
    "Properties": {
     "ContainerDefinitions": [
      {
       "Essential": true,
       "Image": {
-       "Fn::Sub": "089340569022.dkr.ecr.eu-west-2.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-089340569022-eu-west-2:d19e05a727e2b50f976b846a9db182eb91fcec5f90e0146dde171525d462a658"
+       "Fn::Sub": "089340569022.dkr.ecr.eu-west-2.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-089340569022-eu-west-2:3d550e358b96406caa6e6365dbf25706cba6a8be442519459daaeca69b8290b8"
       },
       "LogConfiguration": {
        "LogDriver": "awslogs",
        "Options": {
         "awslogs-group": {
-         "Ref": "SandboxServiceTaskDefwebLogGroup78E4594A"
+         "Ref": "SandboxServiceV4TaskDefwebLogGroup35E22AED"
         },
-        "awslogs-stream-prefix": "SandboxService",
+        "awslogs-stream-prefix": "SandboxServiceV4",
         "awslogs-region": "eu-west-2"
        }
       },
@@ -118,11 +176,11 @@
     "Cpu": "1024",
     "ExecutionRoleArn": {
      "Fn::GetAtt": [
-      "SandboxServiceTaskDefExecutionRoleE6E947B8",
+      "SandboxServiceV4TaskDefExecutionRole5664F8E1",
       "Arn"
      ]
     },
-    "Family": "NexusBioComputeStackSandboxServiceTaskDefA2785EED",
+    "Family": "NexusBioComputeStackSandboxServiceV4TaskDef219051FA",
     "Memory": "2048",
     "NetworkMode": "awsvpc",
     "RequiresCompatibilities": [
@@ -130,24 +188,24 @@
     ],
     "TaskRoleArn": {
      "Fn::GetAtt": [
-      "SandboxServiceTaskDefTaskRoleEC9E4CA2",
+      "SandboxServiceV4TaskDefTaskRoleB4FBB42B",
       "Arn"
      ]
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NexusBioComputeStack/SandboxService/TaskDef/Resource"
+    "aws:cdk:path": "NexusBioComputeStack/SandboxServiceV4/TaskDef/Resource"
    }
   },
-  "SandboxServiceTaskDefwebLogGroup78E4594A": {
+  "SandboxServiceV4TaskDefwebLogGroup35E22AED": {
    "Type": "AWS::Logs::LogGroup",
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
    "Metadata": {
-    "aws:cdk:path": "NexusBioComputeStack/SandboxService/TaskDef/web/LogGroup/Resource"
+    "aws:cdk:path": "NexusBioComputeStack/SandboxServiceV4/TaskDef/web/LogGroup/Resource"
    }
   },
-  "SandboxServiceTaskDefExecutionRoleE6E947B8": {
+  "SandboxServiceV4TaskDefExecutionRole5664F8E1": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -164,10 +222,10 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NexusBioComputeStack/SandboxService/TaskDef/ExecutionRole/Resource"
+    "aws:cdk:path": "NexusBioComputeStack/SandboxServiceV4/TaskDef/ExecutionRole/Resource"
    }
   },
-  "SandboxServiceTaskDefExecutionRoleDefaultPolicyD48DC60E": {
+  "SandboxServiceV4TaskDefExecutionRoleDefaultPolicy74E01764": {
    "Type": "AWS::IAM::Policy",
    "Properties": {
     "PolicyDocument": {
@@ -205,36 +263,26 @@
        "Effect": "Allow",
        "Resource": {
         "Fn::GetAtt": [
-         "SandboxServiceTaskDefwebLogGroup78E4594A",
+         "SandboxServiceV4TaskDefwebLogGroup35E22AED",
          "Arn"
         ]
        }
-      },
-      {
-       "Action": [
-        "ecr:GetAuthorizationToken",
-        "ecr:BatchCheckLayerAvailability",
-        "ecr:GetDownloadUrlForLayer",
-        "ecr:BatchGetImage"
-       ],
-       "Effect": "Allow",
-       "Resource": "arn:aws:ecr:eu-west-2:089340569022:repository/nexusbio-sandbox-base"
       }
      ],
      "Version": "2012-10-17"
     },
-    "PolicyName": "SandboxServiceTaskDefExecutionRoleDefaultPolicyD48DC60E",
+    "PolicyName": "SandboxServiceV4TaskDefExecutionRoleDefaultPolicy74E01764",
     "Roles": [
      {
-      "Ref": "SandboxServiceTaskDefExecutionRoleE6E947B8"
+      "Ref": "SandboxServiceV4TaskDefExecutionRole5664F8E1"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NexusBioComputeStack/SandboxService/TaskDef/ExecutionRole/DefaultPolicy/Resource"
+    "aws:cdk:path": "NexusBioComputeStack/SandboxServiceV4/TaskDef/ExecutionRole/DefaultPolicy/Resource"
    }
   },
-  "SandboxServiceD9D0E336": {
+  "SandboxServiceV4ServiceF88E269E": {
    "Type": "AWS::ECS::Service",
    "Properties": {
     "Cluster": {
@@ -246,15 +294,8 @@
       "Enable": false,
       "Rollback": false
      },
-     "DeploymentCircuitBreaker": {
-      "Enable": true,
-      "Rollback": true
-     },
      "MaximumPercent": 200,
-     "MinimumHealthyPercent": 0
-    },
-    "DeploymentController": {
-     "Type": "ECS"
+     "MinimumHealthyPercent": 50
     },
     "EnableECSManagedTags": false,
     "HealthCheckGracePeriodSeconds": 60,
@@ -264,7 +305,7 @@
       "ContainerName": "web",
       "ContainerPort": 8000,
       "TargetGroupArn": {
-       "Ref": "SandboxServiceLBPublicListenerECSGroupE3B73D2C"
+       "Ref": "SandboxServiceV4LBPublicListenerECSGroup79130D64"
       }
      }
     ],
@@ -274,7 +315,7 @@
       "SecurityGroups": [
        {
         "Fn::GetAtt": [
-         "SandboxServiceSecurityGroup8B39983F",
+         "SandboxServiceV4ServiceSecurityGroup1708E799",
          "GroupId"
         ]
        }
@@ -290,22 +331,22 @@
      }
     },
     "TaskDefinition": {
-     "Ref": "SandboxServiceTaskDefDA830ECB"
+     "Ref": "SandboxServiceV4TaskDef4E1B4D88"
     }
    },
    "DependsOn": [
-    "SandboxServiceLBPublicListenerECSGroupE3B73D2C",
-    "SandboxServiceLBPublicListenerCB69CD23",
-    "SandboxServiceTaskDefTaskRoleEC9E4CA2"
+    "SandboxServiceV4LBPublicListenerECSGroup79130D64",
+    "SandboxServiceV4LBPublicListener78DE668A",
+    "SandboxServiceV4TaskDefTaskRoleB4FBB42B"
    ],
    "Metadata": {
-    "aws:cdk:path": "NexusBioComputeStack/SandboxService/Service/Service"
+    "aws:cdk:path": "NexusBioComputeStack/SandboxServiceV4/Service/Service"
    }
   },
-  "SandboxServiceSecurityGroup8B39983F": {
+  "SandboxServiceV4ServiceSecurityGroup1708E799": {
    "Type": "AWS::EC2::SecurityGroup",
    "Properties": {
-    "GroupDescription": "NexusBioComputeStack/SandboxService/Service/SecurityGroup",
+    "GroupDescription": "NexusBioComputeStack/SandboxServiceV4/Service/SecurityGroup",
     "SecurityGroupEgress": [
      {
       "CidrIp": "0.0.0.0/0",
@@ -318,10 +359,37 @@
     }
    },
    "DependsOn": [
-    "SandboxServiceTaskDefTaskRoleEC9E4CA2"
+    "SandboxServiceV4TaskDefTaskRoleB4FBB42B"
    ],
    "Metadata": {
-    "aws:cdk:path": "NexusBioComputeStack/SandboxService/Service/SecurityGroup/Resource"
+    "aws:cdk:path": "NexusBioComputeStack/SandboxServiceV4/Service/SecurityGroup/Resource"
+   }
+  },
+  "SandboxServiceV4ServiceSecurityGroupfromNexusBioComputeStackSandboxServiceV4LBSecurityGroup6DBE50728000AB06BE49": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "Load balancer to target",
+    "FromPort": 8000,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "SandboxServiceV4ServiceSecurityGroup1708E799",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "SandboxServiceV4LBSecurityGroup89BDA21B",
+      "GroupId"
+     ]
+    },
+    "ToPort": 8000
+   },
+   "DependsOn": [
+    "SandboxServiceV4TaskDefTaskRoleB4FBB42B"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "NexusBioComputeStack/SandboxServiceV4/Service/SecurityGroup/from NexusBioComputeStackSandboxServiceV4LBSecurityGroup6DBE5072:8000"
    }
   },
   "LambdaOrchestratorServiceRoleE363C8B2": {
@@ -459,7 +527,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": "cdk-hnb659fds-assets-089340569022-eu-west-2",
-     "S3Key": "12edc767124a7c73df2ca5e79dd933ce4ef3b6ac8a629a88eb7e61fcc741641e.zip"
+     "S3Key": "2b1afff3ce81064d2d7f247dd44ef75c28418979f482b3c0de4654a09797e510.zip"
     },
     "Environment": {
      "Variables": {
@@ -476,7 +544,7 @@
          "http://",
          {
           "Fn::GetAtt": [
-           "SandboxServiceLB37D1042A",
+           "SandboxServiceV4LB0C324DD5",
            "DNSName"
           ]
          },
@@ -520,15 +588,15 @@
    ],
    "Metadata": {
     "aws:cdk:path": "NexusBioComputeStack/LambdaOrchestrator/Resource",
-    "aws:asset:path": "asset.12edc767124a7c73df2ca5e79dd933ce4ef3b6ac8a629a88eb7e61fcc741641e",
-    "aws:asset:is-bundled": false,
+    "aws:asset:path": "asset.2b1afff3ce81064d2d7f247dd44ef75c28418979f482b3c0de4654a09797e510",
+    "aws:asset:is-bundled": true,
     "aws:asset:property": "Code"
    }
   },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/2VR0W7CMAz8Ft6Dx8qkPQ8mpklomyjvyKSmMg0Jil0QqvrvU0qLBnvy+e4cn5UMstcMJiM8y9gW1djxFppc0VYGz7JpyAo0c1eLUjTznR/gAmOJSmuU6p127Fk5+GR4ZIJXZE/xD9fP5hRPbCkN9bA1ZGVzRFWKXuCL9BxitQxYzNCht1Q8jJJDUbYuYLHtHOzLUwbN/8ku/F0/eFiUfK8PuNfWGEvSjxjq4/W0W9saxgM0q+C6/F39CY7tJbVXlK6JGxQhFXgPtqL4ecCS3hKTNFjRMQhriJcZChkXSoFmGcrbxgGnpzJocrJ1ZL3c9DuiNQ4P2wKhWdTeDv8x4NbIdAhzTSBTmNW2Ik3L2+T9rvVYq+nkXLFkX7bGh4JgL0+n7AWyZ5iM9sI8jrVXPhCsrvUXpDJx5EcCAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/32SW0/DMAyFf8veWzMKEq+wcRESEmjjffJSL5hmSRW7Q1PV/47SdmNcxJOPT87nXJQCiqsC2ukEPyQ3ZZU7XkO7VDRVhh+yaskItHPXiFLM5ht/kPcYLSq9olS3tGHPysGnwE8neEX2FE+8kV1S3LGhBI2yy8jIqkZVil7gpq4dG0zMU8Byhg69ofIHTg5F2biA5bpPsLe7Atq/6f4S3/rTHIuSHzMHfbL+itGSPsTQ1MNVj206eQHtkkwTWffHyP/GnY0k8st+9L3fZYxbaBfB9W/U15fg2OxTO6i0b1yhCKnAbTAVxcctWrpJTlqDBdVBWEPcz1Aoc8EKtE/BHk900F0mF4dJAy4XMGtMRTqQuF2XCPONv2+8Sc/RJfy50brRrCeWipa97bJpjq5+Q5hOrsePdZbqMCKv9/oW/Bh56ZuvkT6UBO9ytisuoTiH6eRdmPPYeOUtwWKon1dAtEm3AgAA"
    },
    "Metadata": {
     "aws:cdk:path": "NexusBioComputeStack/CDKMetadata/Default"
@@ -536,11 +604,27 @@
   }
  },
  "Outputs": {
-  "SandboxServiceLoadBalancerDNSC1BBDF52": {
+  "SandboxServiceV4LoadBalancerDNS2112555D": {
    "Value": {
     "Fn::GetAtt": [
-     "SandboxServiceLB37D1042A",
+     "SandboxServiceV4LB0C324DD5",
      "DNSName"
+    ]
+   }
+  },
+  "SandboxServiceV4ServiceURL4F53F74C": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "http://",
+      {
+       "Fn::GetAtt": [
+        "SandboxServiceV4LB0C324DD5",
+        "DNSName"
+       ]
+      }
+     ]
     ]
    }
   }

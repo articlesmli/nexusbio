@@ -1,0 +1,1 @@
+{"statusCode": 200, "session_id": "test-session-002", "status": "Success", "literature_chunks_count": 1, "molecular_evaluation": {"compound_id": "CMP-001", "valid": true, "canonical_smiles": "CC(=O)OC1=CC=CC=C1C(=O)O", "metrics": {"qed": 0.82, "molecular_weight": 180.16, "lipinski_violations": 0}, "audit_metadata": {"sandbox_engine": "rdkit-fallback-mock"}}}

@@ -1,6 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as python from '@aws-cdk/aws-lambda-python-alpha';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as ecs_patterns from 'aws-cdk-lib/aws-ecs-patterns';
 import { Construct } from 'constructs';
@@ -15,7 +16,6 @@ export class ComputeStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: ComputeStackProps) {
     super(scope, id, props);
 
-    // ECS Fargate container behind an Application Load Balancer (ALB)
     const cluster = new ecs.Cluster(this, 'SandboxCluster', { vpc: props.vpc });
 
     const fargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, 'SandboxServiceV4', {
@@ -26,19 +26,19 @@ export class ComputeStack extends cdk.Stack {
         image: ecs.ContainerImage.fromAsset('../cheminformatics_sandbox'),
         containerPort: 8000,
       },
-      publicLoadBalancer: true, // Public ALB to route incoming traffic
+      publicLoadBalancer: true,
     });
 
-    // Configure health check path for the Application Load Balancer target group
     fargateService.targetGroup.configureHealthCheck({
       path: '/health',
     });
 
-    // Lambda Orchestrator Function
-    const orchestratorFunction = new lambda.Function(this, 'LambdaOrchestrator', {
+    // PythonFunction automatically packages requirements.txt dependencies via Docker
+    const orchestratorFunction = new python.PythonFunction(this, 'LambdaOrchestrator', {
+      entry: '../lambda_orchestrator',
       runtime: lambda.Runtime.PYTHON_3_11,
-      handler: 'handler.lambda_handler',
-      code: lambda.Code.fromAsset('../lambda_orchestrator'),
+      index: 'handler.py',
+      handler: 'lambda_handler',
       vpc: props.vpc,
       vpcSubnets: { subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS },
       timeout: cdk.Duration.seconds(60),
@@ -49,7 +49,6 @@ export class ComputeStack extends cdk.Stack {
       },
     });
 
-    // Grant least-privilege resource access
     props.dataLakeBucket.grantReadWrite(orchestratorFunction);
     props.auditTable.grantWriteData(orchestratorFunction);
   }

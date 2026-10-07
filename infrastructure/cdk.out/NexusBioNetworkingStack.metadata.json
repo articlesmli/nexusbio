@@ -4,7 +4,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...node internals..."
       ]
     },
     {
@@ -16,7 +16,7 @@
         "    ...new Vpc2 in aws-cdk-lib...",
         "    at new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
         "    at <anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
-        "    ...node internals, ts-node..."
+        "    ...node internals..."
       ]
     }
   ],
@@ -57,7 +57,7 @@
         "...new Vpc2 in aws-cdk-lib...",
         "new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
-        "...node internals, ts-node, ts-node..."
+        "...node internals..."
       ]
     }
   ],
@@ -72,7 +72,7 @@
         "...new Vpc2 in aws-cdk-lib...",
         "new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
-        "...node internals, ts-node, ts-node..."
+        "...node internals..."
       ]
     }
   ],
@@ -87,7 +87,7 @@
         "...new Vpc2 in aws-cdk-lib...",
         "new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
-        "...node internals, ts-node, ts-node..."
+        "...node internals..."
       ]
     }
   ],
@@ -102,6 +102,45 @@
         "...App.synth in aws-cdk-lib...",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:33:5)",
         "...node internals..."
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/Exports/Output{\"Ref\":\"NexusBioVPCPublicSubnetSubnet1SubnetC4C77E4C\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefNexusBioVPCPublicSubnetSubnet1SubnetC4C77E4C0665FC44"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:33:5)"
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/Exports/Output{\"Ref\":\"NexusBioVPCPublicSubnetSubnet2SubnetE8BF887B\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefNexusBioVPCPublicSubnetSubnet2SubnetE8BF887BF2901C85"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:33:5)"
+      ]
+    }
+  ],
+  "/NexusBioNetworkingStack/Exports/Output{\"Ref\":\"NexusBioVPCA3321769\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefNexusBioVPCA3321769C971BC5B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:33:5)"
       ]
     }
   ],
@@ -122,19 +161,6 @@
     {
       "type": "aws:cdk:logicalId",
       "data": "ExportsOutputRefNexusBioVPCPrivateSubnetSubnet2Subnet29FC0BF9AED8ED84"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...App.synth in aws-cdk-lib...",
-        "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:33:5)"
-      ]
-    }
-  ],
-  "/NexusBioNetworkingStack/Exports/Output{\"Ref\":\"NexusBioVPCA3321769\"}": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "ExportsOutputRefNexusBioVPCA3321769C971BC5B"
     },
     {
       "type": "aws:cdk:creationStack",
@@ -199,7 +225,7 @@
         "...new Vpc2 in aws-cdk-lib...",
         "new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
-        "...node internals, ts-node..."
+        "...node internals..."
       ]
     }
   ],
@@ -214,7 +240,7 @@
         "...new Vpc2 in aws-cdk-lib...",
         "new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
-        "...node internals, ts-node..."
+        "...node internals..."
       ]
     }
   ],
@@ -229,7 +255,7 @@
         "...new Vpc2 in aws-cdk-lib...",
         "new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
-        "...node internals, ts-node..."
+        "...node internals..."
       ]
     }
   ],
@@ -288,7 +314,7 @@
         "...new Vpc2 in aws-cdk-lib...",
         "new NetworkingStack (/home/ivanovaml/nexusbio/infrastructure/lib/networking_stack.ts:12:16)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:16:25)",
-        "...node internals, ts-node..."
+        "...node internals..."
       ]
     }
   ],

@@ -4,7 +4,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:19:22)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...node internals..."
       ]
     }
   ],
@@ -24,7 +24,7 @@
       "data": [
         "new StorageStack (/home/ivanovaml/nexusbio/infrastructure/lib/storage_stack.ts:28:30)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:19:22)",
-        "...node internals, ts-node, ts-node..."
+        "...node internals..."
       ]
     }
   ],
@@ -38,7 +38,7 @@
       "data": [
         "new StorageStack (/home/ivanovaml/nexusbio/infrastructure/lib/storage_stack.ts:43:27)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:19:22)",
-        "...node internals, ts-node, ts-node..."
+        "...node internals..."
       ]
     }
   ],
@@ -52,7 +52,7 @@
       "data": [
         "new StorageStack (/home/ivanovaml/nexusbio/infrastructure/lib/storage_stack.ts:64:34)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:19:22)",
-        "...node internals, ts-node, ts-node..."
+        "...node internals..."
       ]
     }
   ],
@@ -93,7 +93,7 @@
         "...new Bucket2 in aws-cdk-lib...",
         "new StorageStack (/home/ivanovaml/nexusbio/infrastructure/lib/storage_stack.ts:15:27)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:19:22)",
-        "...node internals, ts-node, ts-node..."
+        "...node internals..."
       ]
     },
     {
@@ -140,7 +140,7 @@
         "...new Table2 in aws-cdk-lib...",
         "new StorageStack (/home/ivanovaml/nexusbio/infrastructure/lib/storage_stack.ts:21:23)",
         "<anonymous> (/home/ivanovaml/nexusbio/infrastructure/bin/nexusbio.ts:19:22)",
-        "...node internals, ts-node, ts-node..."
+        "...node internals..."
       ]
     }
   ],

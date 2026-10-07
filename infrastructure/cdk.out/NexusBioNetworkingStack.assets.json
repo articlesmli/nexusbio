@@ -1,16 +1,16 @@
 {
   "version": "54.0.0",
   "files": {
-    "90a8fd405be0e2eb656744ac7a0af190e95685783f30be0dd9fb59ffe5c09718": {
+    "a48f1baf267c593db1a9362130e51b6c02fa65414d98cb25e8727231bc7f3976": {
       "displayName": "NexusBioNetworkingStack Template",
       "source": {
         "path": "NexusBioNetworkingStack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "089340569022-eu-west-2-7f77d64e": {
+        "089340569022-eu-west-2-a0dc5760": {
           "bucketName": "cdk-hnb659fds-assets-089340569022-eu-west-2",
-          "objectKey": "90a8fd405be0e2eb656744ac7a0af190e95685783f30be0dd9fb59ffe5c09718.json",
+          "objectKey": "a48f1baf267c593db1a9362130e51b6c02fa65414d98cb25e8727231bc7f3976.json",
           "region": "eu-west-2",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::089340569022:role/cdk-hnb659fds-file-publishing-role-089340569022-eu-west-2"
         }
