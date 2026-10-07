@@ -18,7 +18,7 @@ export class ComputeStack extends cdk.Stack {
     // ECS Fargate container behind an Application Load Balancer (ALB)
     const cluster = new ecs.Cluster(this, 'SandboxCluster', { vpc: props.vpc });
 
-    const fargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, 'SandboxService', {
+    const fargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, 'SandboxServiceV4', {
       cluster,
       memoryLimitMiB: 2048,
       cpu: 1024,
