@@ -37,10 +37,14 @@ export class ComputeStack extends cdk.Stack {
       minHealthyPercent: 0,
     });
 
-    // Optional: If you want to customize the health check path (defaults to '/' if omitted)
+    // CRITICAL FIX: Explicitly configure the target group health check 
+    // to look at port 8000 and use a valid HTTP path (e.g., '/' or your health endpoint)
     fargateService.targetGroup.configureHealthCheck({
-      path: '/', // Change this to your specific health check route if needed (e.g., '/health')
+      path: '/', // Change to '/health' if your python app has a specific health route
+      port: '8000', 
       healthyHttpCodes: '200-299',
+      interval: cdk.Duration.seconds(30),
+      timeout: cdk.Duration.seconds(5),
     });
 
     fargateService.taskDefinition.addToExecutionRolePolicy(
