@@ -68,29 +68,6 @@ The automated pipeline handles three core stages on every push to `main`:
 * Builds and pushes the base RDKit container image directly to Azure.
 
 
-
----
-
-## Pipeline Health Report
-
-| Pipeline Job | Status | Target / Environment | Last Verified |
-| --- | --- | --- | --- |
-| **Python Test Suite (`test-python`)** | 🟢 Passing
-
- | Python 3.11 / Pytest / Flake8 | Run #49 (Success)
-
- |
-| **Infrastructure Validation (`test-infrastructure`)** | 🟢 Passing
-
- | Node.js 22 / TypeScript | Run #49 (Success)
-
- |
-| **Azure Deployment (`deploy-azure`)** | 🟢 Healthy
-
- | Azure Container Registry (`nexusbio`) | Run #49 (Success)
-
- |
-
 ---
 
 ## Getting Started Locally
