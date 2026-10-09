@@ -54,11 +54,11 @@ jobs:
         working-directory: ./infrastructure
         run: npm ci
 
-      - name: Build & Validate CDK Stack
+      - name: Build & Validate Stack
         working-directory: ./infrastructure
         run: npm run build
 
-  deploy-aws:
+  deploy-azure:
     needs: [test-python, test-infrastructure]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -66,45 +66,20 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+      - name: Azure Login
+        uses: azure/login@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-west-2
-          
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Build and Push Base RDKit Image
+      - name: Log in to Azure Container Registry
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.AZURE_REGISTRY_NAME }}.azurecr.io
+          username: ${{ secrets.AZURE_CREDENTIALS_CLIENT_ID }} # Handled automatically or via service principal
+          password: ${{ secrets.AZURE_CREDENTIALS_CLIENT_SECRET }}
+
+      - name: Build and Push Base RDKit Image to ACR
         working-directory: ./cheminformatics_sandbox
         run: |
-          # Safely check if the repository exists, and create it if it doesn't
-          aws ecr describe-repositories --repository-names nexusbio-sandbox-base || \
-          aws ecr create-repository --repository-name nexusbio-sandbox-base
-
-          # Build the base image
-          docker build -f Dockerfile.base -t nexusbio-sandbox-base:latest .
-
-          # Tag and push to ECR
-          docker tag nexusbio-sandbox-base:latest 089340569022.dkr.ecr.eu-west-2.amazonaws.com/nexusbio-sandbox-base:latest
-          docker push 089340569022.dkr.ecr.eu-west-2.amazonaws.com/nexusbio-sandbox-base:latest
-
-      - name: Set up Node.js for CDK
-        uses: actions/setup-node@v5
-        with:
-          node-version: '22'
-          cache: 'npm'
-          cache-dependency-path: infrastructure/package-lock.json
-
-      - name: Install Infrastructure Dependencies
-        working-directory: ./infrastructure
-        run: npm ci
-
-      - name: Install AWS CDK Globally
-        run: npm install -g aws-cdk
-
-      - name: Deploy AWS Infrastructure
-        working-directory: ./infrastructure
-        run: cdk deploy --all --require-approval never
+          docker build -f Dockerfile.base -t ${{ secrets.AZURE_REGISTRY_NAME }}.azurecr.io/nexusbio-sandbox-base:latest .
+          docker push ${{ secrets.AZURE_REGISTRY_NAME }}.azurecr.io/nexusbio-sandbox-base:latest
