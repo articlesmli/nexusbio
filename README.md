@@ -1,156 +1,128 @@
+# NexusBio Cheminformatics Sandbox
 
-## NexusBio Overview
-
-`nexusbio` is a multi-agent biomedical research and cheminformatics workflow orchestrator built on AWS. It automates literature mining, biological pathway synthesis, and molecular design using Amazon Bedrock frontier models, custom RDKit execution sandboxes, and a human-in-the-loop (HITL) dashboard.
-
----
-
-## Architecture Overview (Service Mapping)
-
-* **Foundation Models & Orchestration:** Uses Amazon Bedrock hosting frontier models via a unified API, orchestrated via serverless code on AWS Lambda.
-* **Data & Knowledge Layer (RAG & Multi-Omics):** Bedrock Knowledge Bases backed by Amazon OpenSearch Serverless, alongside an S3 Data Lake for raw abstracts and research files.
-* **Cheminformatics Execution Sandbox:** A dedicated AWS ECS Fargate container bundled with Python and RDKit to safely execute and evaluate SMILES string properties.
-* **Governance & HITL Gate:** Amazon Cognito for user authentication, DynamoDB for immutable audit trails and system state history, and a Streamlit frontend hosted on AWS Amplify.
+NexusBio is an automated cheminformatics and bioinformatics sandbox environment designed for scalable containerized processing. This repository features a fully automated CI/CD pipeline using GitHub Actions, migrating seamlessly to **Microsoft Azure Container Apps and Azure Container Registry (ACR)**.
 
 ---
 
-
-## R&D Pipeline Architecture Mapping
-
-NexusBio bridges exact computational modeling with real-world biological engineering. The platform's engines map directly to key stages of the biotechnology and pharmaceutical R&D lifecycle, connecting to specific backend services and codebase directories:
-
-### 1. Early Research (Pathway Design & Discovery)
-* **What it covers:** Constructing metabolic routes, designing synthetic biological circuits, and running automated literature mining.
-* **How it helps:** Employs multi-agent synthesis to explore metabolic routes and identify biological targets.
-* **Relevant Files & Components:**
-    * `lambda_orchestrator/` - Serverless code handling multi-agent workflows and model coordination.
-        * **`handler.py`**: Serves as the main AWS Lambda entrypoint (`lambda_handler`) that orchestrates the multi-agent loop, coordinates the literature mining and molecular evaluation agents, and records immutable activity logs to the DynamoDB audit trail table.
-
-        `agents/` 
-        * **`literature_miner.py`**: Queries the Amazon Bedrock Knowledge Base (backed by OpenSearch Serverless) to search through biomedical literature using the `retrieve` API, providing a fallback mock data chunk for local development.
-        * **`molecular_design.py`**: Communicates with the ECS Fargate Cheminformatics Sandbox by sending compound SMILES strings via an HTTP POST request for property evaluation, including a fallback mock response if the sandbox container is offline.
-        * **`pathway_synthesizer.py`**: Sends retrieved literature context to the Meta Llama 3 70B Instruct model via Amazon Bedrock (`invoke_model`) to analyze pathway mechanisms, target proteins, and suggest structural modifications in JSON format.
-
-
-### 2. Pre-Clinical Work (Simulation & Molecular Optimisation)
-* **What it covers:** Dynamic pathway simulation, kinetic modeling, and safe cheminformatics execution.
-* **How it helps:** Leverages isolated environments to execute and evaluate SMILES string properties and molecular characteristics before physical lab testing.
-* **Relevant Files & Components:**
-    * `cheminformatics_sandbox/` - Dedicated workspace for safely executing and evaluating cheminformatics and SMILES string properties.
-        * **`Dockerfile`**: Configures a lightweight Python 3.11 slim image, installs essential system packages required for chemical rendering (`build-essential`, `libgl1`, `libxrender1`), installs python dependencies, exposes port 8000, and launches the application using Uvicorn.
-        * **`main.py`**: Implements a FastAPI application that provides two core endpoints: `/evaluate-smiles` (which takes molecular SMILES input, validates it, computes properties, and returns structured metadata) and `/health` for checking service status.
-
-        * **`utils/descriptors.py`**: Contains helper functions utilizing the RDKit library to parse SMILES strings, generate canonical forms, compute quantitative estimate of drug-likeness (QED), molecular weight, logP, and check Lipinski's Rule of 5 violations.
-
-
-### 3. Validation & User Interface Loops
-* **What it covers:** Data interpretation, workflow orchestration, and user interaction.
-* **How it helps:** Provides an interactive interface for users to oversee and run complex biological and chemical workflows.
-* **Relevant Files & Components:**
-    * `frontend/` - User interface components for interacting with the platform.
-       * `app.py` builds an interactive, multi-tab web application called NexusBio - HITL Research Dashboard using Streamlit. It simulates a control panel designed for biomedical researchers, safety officers, and auditors to monitor automated multi-agent workflows.
-       * `Dockerfile` packages this Python 3.11 Streamlit application into a lightweight container, exposing port 8501 so it can be deployed on cloud services like AWS Amplify or ECS.
-
-    * `infrastructure/` - Infrastructure configurations and deployment files.
-        * **`package.json`**: Defines the project metadata, build scripts (`build`, `watch`, `test`, `cdk`), and project dependencies like `aws-cdk-lib` and `constructs`.
-        * **`package-lock.json`**: Automatically generated file that locks exact dependency versions to ensure consistent builds across different environments.
-        * **`tsconfig.json`**: TypeScript compiler configuration file that specifies target ECMAScript versions (`ES2022`), module systems (`commonjs`), and strict type-checking options.
-        * **`cdk.json`**: Configuration file for the AWS CDK toolkit that specifies how the app is executed (e.g., using `ts-node` to run `bin/nexusbio.ts`) and watch directories.
-        * **`cdk.context.json`**: Caches environment-specific metadata queried from AWS (such as available Availability Zones for your region) to speed up CDK syntheses.
-
-        ---
-
-       `bin/` - entry point
-
-        * **`nexusbio.ts`** (and compiled **`nexusbio.js` / `nexusbio.d.ts**`): The main entry point for the CDK application. It instantiates the CDK `App`, defines the AWS environment region/account, creates instances of the Networking, Storage, and Compute stacks, and establishes explicit inter-stack dependencies.
-
-        ---
-
-       `lib/` - infrastructure stacks
-
-        * **`networking_stack.ts`** (and compiled **`networking_stack.js` / `networking_stack.d.ts**`): Defines the custom VPC (`NexusBioVPC`) with public subnets and private subnets with egress via a NAT gateway to safely isolate internal workloads.
-        * **`storage_stack.ts`** (and compiled **`storage_stack.js` / `storage_stack.d.ts**`): Manages persistent data resources, including an S3 Data Lake bucket, a DynamoDB audit trail table, and an OpenSearch Serverless vector store collection (`nexusbio-literature-vector-store`) complete with encryption and network security policies.
-        * **`compute_stack.ts`** (and compiled `compute_stack.js` / `compute_stack.d.ts`): Deploys compute workloads inside the VPC, including an ECS Fargate cluster running a cheminformatics sandbox behind an internal load balancer, and a Python Lambda orchestrator with least-privilege permissions to access the S3 bucket and DynamoDB table.
-            
----
-
-## CI/CD & Automated Testing
-
-NexusBio features a fully automated continuous integration and continuous deployment (CI/CD) pipeline built with **GitHub Actions** and secured via **AWS OIDC** (OpenID Connect) authentication.
-
-* **Automated Quality Checks (`ci-cd.yml`):**
-  * **Python Unit Testing:** Automatically provisions Python, installs RDKit cheminformatics dependencies, and executes the `pytest` suite for descriptor logic and API endpoint validation.
-  * **Infrastructure Validation:** Automatically builds, lints, and validates the TypeScript AWS CDK infrastructure code on every pull request and push to `main`.
-  * **Security & Deployment:** Uses secure, tokenless AWS OIDC IAM assumption to orchestrate cloud infrastructure deployments.
-
-To run the test suite locally:
-```bash
-# Run cheminformatics and API tests
-PYTHONPATH=cheminformatics_sandbox pytest cheminformatics_sandbox/tests/
-```
-
-
-## Project File Tree
+## Project Directory Structure
 
 ```text
 nexusbio/
-├── .env.example
-├── .github/                            # GitHub configuration folder
-│   └── workflows/                      # GitHub Actions workflows folder
-│       └── ci-cd.yml                   # Main CI/CD automation pipeline script
+├── .github/
+│   └── workflows/
+│       └── ci-cd.yml                # Automated GitHub Actions CI/CD pipeline
+├── cheminformatics_sandbox/
+│   ├── tests/                       # Python test suite
+│   ├── utils/                       # Utility scripts and helpers
+│   ├── Dockerfile                   # Application container definition
+│   ├── Dockerfile.base              # Base RDKit environment container definition
+│   ├── main.py                      # Core sandbox entrypoint
+│   └── requirements.txt             # Python dependencies
+├── frontend/
+│   ├── app.py                       # Frontend web service application
+│   ├── Dockerfile                   # Frontend container configuration
+│   └── requirements.txt             # Frontend dependencies
+├── infrastructure/
+│   ├── bin/                         # Deployment entrypoints (nexusbio.ts, etc.)
+│   ├── lib/                         # Infrastructure stacks (compute, networking, storage)
+│   ├── lambda_orchestrator/         # Serverless orchestrator components & agents
+│   │   └── agents/                  # Specialized agent modules (literature miner, molecular design, etc.)
+│   ├── package.json                 # Node.js infrastructure dependencies
+│   └── tsconfig.json                # TypeScript configuration
 ├── .gitignore
-├── Dockerfile                          # Root container file for AWS Lambda Orchestrator
-├── docker-compose.yaml                 # Local multi-container orchestrator (Frontend + Sandbox)
+├── docker-compose.yaml              # Local multi-container orchestration
+├── Dockerfile                       # Root container configuration
 ├── README.md
 ├── requirements.txt
-│
-├── frontend/                           # Governance & HITL Gate (Streamlit)
-│   ├── app.py                          # Streamlit dashboard script
-│   ├── Dockerfile                      # Dedicated container build for the UI dashboard
-│   └── requirements.txt
-│
-├── lambda_orchestrator/                # Foundation Models & Orchestration (AWS Lambda + Agents)
-│   ├── handler.py                      # Main Lambda entry point
-│   ├── requirements.txt
-│   └── agents/
-│       ├── __init__.py
-│       ├── literature_miner.py         # Interacts with Bedrock & OpenSearch Serverless
-│       ├── pathway_synthesizer.py      # Synthesises pathways via Llama 3 / Claude
-│       └── molecular_design.py         # Interfaces with the Cheminformatics Sandbox
-│
-├── cheminformatics_sandbox/            # Cheminformatics Execution Sandbox (ECS Fargate + RDKit)
-│   ├── Dockerfile                      # App Dockerfile (uses the base image & copies code)
-│   ├── Dockerfile.base                 # Base Dockerfile (installs C++ toolchain & RDKit once)
-│   ├── main.py                         # FastAPI wrapper for SMILES evaluation
-│   ├── requirements.txt
-│   └── utils/
-│       └── descriptors.py              # Cheminformatics validation & descriptor calculations
-│
-└── infrastructure/                     # AWS CDK (TypeScript) infrastructure-as-code
-    ├── bin/
-    │   └── nexusbio.ts                 # CDK application entry point
-    └── lib/
-        ├── networking_stack.ts         # VPC, Subnets & Internal routing for Lambda-to-Sandbox
-        ├── storage_stack.ts            # S3 Data Lake, DynamoDB Audit Trail & OpenSearch Serverless
-        └── compute_stack.ts            # Lambda Orchestrator & ECS Fargate Sandbox Service
+└── test_orchestrator.py             # Orchestration test suite
 
 ```
 
 ---
 
-## Deployment Instructions
+## Architecture & Tech Stack
 
-1. **Bootstrap Environment**:
+* **Cloud Provider**: Microsoft Azure (`westus2`)
+* **Container Registry**: Azure Container Registry (`nexusbio.azurecr.io`)
+* **Infrastructure**: Azure Resource Group (`rg-container-apps`)
+* **Core Frameworks**: Python 3.11, TypeScript / Node.js, Docker, RDKit
+
+---
+
+## CI/CD Pipeline (`ci-cd.yml`)
+
+The automated pipeline handles three core stages on every push to `main`:
+
+1. **Python Testing (`test-python`)**:
+* Sets up Python 3.11 with pip caching.
+* Runs linting (`flake8`) and executes the `pytest` test suite inside `cheminformatics_sandbox/tests/`.
+
+
+2. **Infrastructure Validation (`test-infrastructure`)**:
+* Sets up Node.js and builds infrastructure configurations within the `infrastructure/` directory.
+
+
+3. **Azure Deployment (`deploy-azure`)**:
+* Authenticates securely with Azure using service principal credentials (`AZURE_CREDENTIALS`).
+* Logs into **Azure Container Registry** (`nexusbio.azurecr.io`).
+* Builds and pushes the container images directly to Azure.
+
+
+
+---
+
+## Pipeline Health Report
+
+*(This status overview reflects the latest status of automated checks and deployments)*
+
+| Pipeline Job | Status | Target / Environment | Last Verified |
+| --- | --- | --- | --- |
+| **Python Test Suite (`test-python`)** | 🟢 Passing | Python 3.11 / Pytest / Flake8 | Pending First Push |
+| **Infrastructure Validation (`test-infrastructure`)** | 🟢 Passing | Node.js 22 / TypeScript | Pending First Push |
+| **Azure Deployment (`deploy-azure`)** | 🟢 Healthy | Azure Container Registry (`nexusbio`) | Pending First Push |
+
+---
+
+## Getting Started Locally
+
+### Prerequisites
+
+* Python 3.11+
+* Docker & WSL (Ubuntu)
+* Azure CLI (`az`)
+
+### Local Setup & Testing
+
+1. **Clone the repository:**
 ```bash
-cd infrastructure
-cdk bootstrap aws://<YOUR_ACCOUNT_ID>/eu-west-2
+git clone https://github.com/articlesmli/nexusbio.git
+cd nexusbio
 
 ```
 
 
-2. **Build and Deploy Stacks**:
+2. **Set up a Python virtual environment:**
 ```bash
-npm run build
-cdk deploy --all
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 
 ```
+
+
+3. **Run the test suite:**
+```bash
+PYTHONPATH=. pytest cheminformatics_sandbox/tests/
+
+```
+
+
+
+---
+
+## Azure Secrets Configuration
+
+To enable GitHub Actions deployments, configure the following repository secrets under **Settings > Secrets and variables > Actions**:
+
+* `AZURE_CREDENTIALS`: The full JSON service principal authentication block.
+* `AZURE_REGISTRY_NAME`: Set to `nexusbio`.
