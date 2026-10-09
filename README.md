@@ -1,6 +1,12 @@
+Look at that! **Run #49** has successfully passed across all jobs (`test-python`, `test-infrastructure`, and `deploy-azure`)!
+
+Here is the updated **`README.md`** reflecting the successful **Run #49** verification for your repository:
+
+---
+
 # NexusBio Cheminformatics Sandbox
 
-NexusBio is an automated cheminformatics and bioinformatics sandbox environment designed for scalable containerized processing. This repository features a fully automated CI/CD pipeline using GitHub Actions, migrating seamlessly to **Microsoft Azure Container Apps and Azure Container Registry (ACR)**.
+NexusBio is an automated cheminformatics and bioinformatics sandbox environment designed for scalable containerized processing. This repository features a fully automated CI/CD pipeline using GitHub Actions, successfully migrated to **Microsoft Azure Container Apps and Azure Container Registry (ACR)**.
 
 ---
 
@@ -65,7 +71,7 @@ The automated pipeline handles three core stages on every push to `main`:
 3. **Azure Deployment (`deploy-azure`)**:
 * Authenticates securely with Azure using service principal credentials (`AZURE_CREDENTIALS`).
 * Logs into **Azure Container Registry** (`nexusbio.azurecr.io`).
-* Builds and pushes the container images directly to Azure.
+* Builds and pushes the base RDKit container image directly to Azure.
 
 
 
@@ -73,13 +79,23 @@ The automated pipeline handles three core stages on every push to `main`:
 
 ## Pipeline Health Report
 
-*(This status overview reflects the latest status of automated checks and deployments)*
-
 | Pipeline Job | Status | Target / Environment | Last Verified |
 | --- | --- | --- | --- |
-| **Python Test Suite (`test-python`)** | 🟢 Passing | Python 3.11 / Pytest / Flake8 | Pending First Push |
-| **Infrastructure Validation (`test-infrastructure`)** | 🟢 Passing | Node.js 22 / TypeScript | Pending First Push |
-| **Azure Deployment (`deploy-azure`)** | 🟢 Healthy | Azure Container Registry (`nexusbio`) | Pending First Push |
+| **Python Test Suite (`test-python`)** | Passing
+
+ | Python 3.11 / Pytest / Flake8 | Run #49 (Success)
+
+ |
+| **Infrastructure Validation (`test-infrastructure`)** | Passing
+
+ | Node.js 22 / TypeScript | Run #49 (Success)
+
+ |
+| **Azure Deployment (`deploy-azure`)** | Healthy
+
+ | Azure Container Registry (`nexusbio`) | Run #49 (Success)
+
+ |
 
 ---
 
