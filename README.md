@@ -1,6 +1,6 @@
 # NexusBio Cheminformatics Sandbox
 
-NexusBio is an automated cheminformatics and bioinformatics sandbox environment designed for scalable containerized processing. This repository features a fully automated CI/CD pipeline using GitHub Actions, successfully migrated to **Microsoft Azure Container Apps and Azure Container Registry (ACR)**.
+NexusBio is an automated cheminformatics and bioinformatics sandbox environment designed for scalable containerized processing. This repository features a fully automated CI/CD pipeline using GitHub Actions, successfully migrated to a pure **Microsoft Azure Container Apps and Azure Container Registry (ACR)** architecture.
 
 ---
 
@@ -22,14 +22,10 @@ nexusbio/
 │   ├── app.py                       # Frontend web service application
 │   ├── Dockerfile                   # Frontend container configuration
 │   └── requirements.txt             # Frontend dependencies
-├── infrastructure/
-│   ├── bin/                         # Deployment entrypoints (nexusbio.ts, etc.)
-│   └── lib/                         # Infrastructure stacks (compute, networking, storage)
-│   └── tsconfig.json                # 
 ├── lambda_orchestrator/             # Serverless orchestrator components & agents
-│   ├──agents/                       # Specialized agent modules (literature miner, molecular design, etc.)
-│   ├── handler.py                   # 
-│   └── requirements.txt             # 
+│   ├── agents/                      # Specialized agent modules (literature miner, molecular design, etc.)
+│   ├── handler.py                   # Orchestrator entrypoint
+│   └── requirements.txt             # Orchestrator Python dependencies
 ├── .gitignore
 ├── docker-compose.yaml              # Local multi-container orchestration
 ├── Dockerfile                       # Root container configuration
@@ -46,27 +42,24 @@ nexusbio/
 * **Cloud Provider**: Microsoft Azure (`westus2`)
 * **Container Registry**: Azure Container Registry (`nexusbio.azurecr.io`)
 * **Infrastructure**: Azure Resource Group (`rg-container-apps`)
-* **Core Frameworks**: Python 3.11, TypeScript / Node.js, Docker, RDKit
+* **Core Frameworks**: Python 3.11, Docker, RDKit
 
 ---
 
 ## CI/CD Pipeline (`ci-cd.yml`)
 
-The automated pipeline handles three core stages on every push to `main`:
+The automated pipeline handles two core stages on every push to `main`:
 
 1. **Python Testing (`test-python`)**:
 * Sets up Python 3.11 with pip caching.
 * Runs linting (`flake8`) and executes the `pytest` test suite inside `cheminformatics_sandbox/tests/`.
 
 
-2. **Infrastructure Validation (`test-infrastructure`)**:
-* Sets up Node.js and builds infrastructure configurations within the `infrastructure/` directory.
-
-
-3. **Azure Deployment (`deploy-azure`)**:
+2. **Azure Deployment (`deploy-azure`)**:
 * Authenticates securely with Azure using service principal credentials (`AZURE_CREDENTIALS`).
 * Logs into **Azure Container Registry** (`nexusbio.azurecr.io`).
 * Builds and pushes the base RDKit container image directly to Azure.
+
 
 
 ---
@@ -83,7 +76,7 @@ The automated pipeline handles three core stages on every push to `main`:
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/articlesmli/nexusbio.git
+git clone [https://github.com/articlesmli/nexusbio.git](https://github.com/articlesmli/nexusbio.git)
 cd nexusbio
 
 ```
@@ -114,3 +107,5 @@ To enable GitHub Actions deployments, configure the following repository secrets
 
 * `AZURE_CREDENTIALS`: The full JSON service principal authentication block.
 * `AZURE_REGISTRY_NAME`: Set to `nexusbio`.
+
+
