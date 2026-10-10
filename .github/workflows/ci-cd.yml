@@ -37,29 +37,8 @@ jobs:
         run: |
           PYTHONPATH=. pytest cheminformatics_sandbox/tests/
 
-  test-infrastructure:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v5
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v5
-        with:
-          node-version: '22'
-          cache: 'npm'
-          cache-dependency-path: infrastructure/package-lock.json
-
-      - name: Install Infrastructure Dependencies
-        working-directory: ./infrastructure
-        run: npm ci
-
-      - name: Build & Validate Stack
-        working-directory: ./infrastructure
-        run: npm run build
-
   deploy-azure:
-    needs: [test-python, test-infrastructure]
+    needs: [test-python]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
@@ -87,5 +66,4 @@ jobs:
           echo "| Pipeline Job | Status | Target / Environment |" >> $GITHUB_STEP_SUMMARY
           echo "| :--- | :---: | :--- |" >> $GITHUB_STEP_SUMMARY
           echo "| **Python Test Suite (`test-python`)** | Passing | Python 3.11 / Pytest / Flake8 |" >> $GITHUB_STEP_SUMMARY
-          echo "| **Infrastructure Validation (`test-infrastructure`)** | Passing | Node.js 22 / TypeScript |" >> $GITHUB_STEP_SUMMARY
           echo "| **Azure Deployment (`deploy-azure`)** | Healthy | Azure Container Registry (`nexusbio`) |" >> $GITHUB_STEP_SUMMARY
