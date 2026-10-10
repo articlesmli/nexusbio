@@ -25,6 +25,7 @@ nexusbio/
 ├── infrastructure/
 │   ├── bin/                         # Deployment entrypoints (nexusbio.ts, etc.)
 │   └── lib/                         # Infrastructure stacks (compute, networking, storage)
+│   └── tsconfig.json                # 
 ├── lambda_orchestrator/             # Serverless orchestrator components & agents
 │   ├──agents/                       # Specialized agent modules (literature miner, molecular design, etc.)
 │   ├── handler.py                   # 
