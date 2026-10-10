@@ -26,9 +26,9 @@ nexusbio/
 │   ├── bin/                         # Deployment entrypoints (nexusbio.ts, etc.)
 │   └── lib/                         # Infrastructure stacks (compute, networking, storage)
 ├── lambda_orchestrator/             # Serverless orchestrator components & agents
-│   └── agents/                      # Specialized agent modules (literature miner, molecular design, etc.)
-│   ├── package.json                 # Node.js infrastructure dependencies
-│   └── tsconfig.json                # TypeScript configuration
+│   ├──agents/                       # Specialized agent modules (literature miner, molecular design, etc.)
+│   ├── handler.py                   # 
+│   └── requirements.txt             # 
 ├── .gitignore
 ├── docker-compose.yaml              # Local multi-container orchestration
 ├── Dockerfile                       # Root container configuration
