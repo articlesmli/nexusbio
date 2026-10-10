@@ -24,9 +24,9 @@ nexusbio/
 │   └── requirements.txt             # Frontend dependencies
 ├── infrastructure/
 │   ├── bin/                         # Deployment entrypoints (nexusbio.ts, etc.)
-│   ├── lib/                         # Infrastructure stacks (compute, networking, storage)
-│   ├── lambda_orchestrator/         # Serverless orchestrator components & agents
-│   │   └── agents/                  # Specialized agent modules (literature miner, molecular design, etc.)
+│   └── lib/                         # Infrastructure stacks (compute, networking, storage)
+├── lambda_orchestrator/             # Serverless orchestrator components & agents
+│   └── agents/                      # Specialized agent modules (literature miner, molecular design, etc.)
 │   ├── package.json                 # Node.js infrastructure dependencies
 │   └── tsconfig.json                # TypeScript configuration
 ├── .gitignore
