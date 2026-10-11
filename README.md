@@ -1,6 +1,8 @@
 # NexusBio Cheminformatics Sandbox
 
-NexusBio is an automated cheminformatics and bioinformatics sandbox environment designed for scalable containerized processing. This repository features a fully automated CI/CD pipeline using GitHub Actions, successfully migrated to a pure **Microsoft Azure Container Apps and Azure Container Registry (ACR)** architecture.
+NexusBio is an automated cheminformatics and bioinformatics sandbox environment designed for scalable containerised processing (It evolved into NexusBio_III; for more details, please visit https://github.com/articlesmli/nexusbio_III). 
+
+NexusBio repository features a fully automated CI/CD pipeline using GitHub Actions, successfully migrated to a pure **Microsoft Azure Container Apps and Azure Container Registry (ACR)** architecture.
 
 ---
 
